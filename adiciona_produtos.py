@@ -53,7 +53,6 @@ def extrai_dados_xml(arquivo_xml):
         # Percorrer todas as tags e seus textos
         for elem in root.iter():
             tag = elem.tag.replace('{http://www.portalfiscal.inf.br/nfe}', '')
-            print(tag,elem.attrib, elem.text)
             if tag == 'cEAN':
                 codigo_de_barras = elem.text
             elif tag == 'NCM':
@@ -81,17 +80,20 @@ def extrai_dados_xml(arquivo_xml):
                     'valor_unitario_comercial': valor_unitario_comercial,
                     'valor_total': valor_total
                 }
-            data.append(dicio)
-            codigo_de_barras = ''
-            ncm = ''
-            nome_produto = ''
-            cfop = ''
-            unidade_comercial = ''
-            quantidade_comercial = ''
-            valor_unitario_comercial = ''
-            valor_total = ''
+                data.append(dicio)
+                codigo_de_barras = ''
+                ncm = ''
+                nome_produto = ''
+                cfop = ''
+                unidade_comercial = ''
+                quantidade_comercial = ''
+                valor_unitario_comercial = ''
+                valor_total = ''
+        return data
     except ET.ParseError as e:
         print(f'O erro foi devido ao {e}')
 
 
-extrai_dados_xml('novos produtos.xml')
+data = extrai_dados_xml('novos produtos.xml')
+
+print(data)

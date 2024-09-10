@@ -45,6 +45,8 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
+novos produtos.xml
+
 *.cover
 *.py,cover
 .hypothesis/
@@ -74,6 +76,7 @@ docs/_build/
 # PyBuilder
 .pybuilder/
 target/
+
 
 # Jupyter Notebook
 .ipynb_checkpoints
