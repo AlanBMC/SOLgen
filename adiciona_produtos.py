@@ -34,8 +34,16 @@ def abre_explorador_de_arquivo_apenas_xml():
     else:
         print('Nenhum arquivo selecionado')
 
-def tratando_quantidade_produtos():
-    pass
+def tratando_quantidade_produtos(vProd, qCom):
+    """
+    tratamento de quantidade, recebe o valor total da mercadoria, a quantidade e o tipo de quantidade
+    """
+    #podemos fazer outros tipos de tratamento.
+
+    valor_unitario = vProd/ (qCom*12)
+
+    return valor_unitario
+
 
 def extrai_dados_xml(arquivo_xml):
     data = []
@@ -69,6 +77,11 @@ def extrai_dados_xml(arquivo_xml):
                 valor_unitario_comercial = elem.text
             elif tag == 'vProd':
                 valor_total = elem.text
+            elif tag == 'uTrib':
+                if elem.text == 'DZ':
+                    valor_unitario_comercial = tratando_quantidade_produtos(valor_total, quantidade_comercial)
+                else:
+                    pass
             if nome_produto and codigo_de_barras and valor_total and valor_unitario_comercial and ncm and cfop:
                 dicio = {
                     'nome': nome_produto,
