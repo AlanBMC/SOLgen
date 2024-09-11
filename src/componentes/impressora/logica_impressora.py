@@ -1,6 +1,4 @@
 
-from impressao import envia_para_impressora
-
 class ImpressoraLogica:
     def __init__(self):
         self.produtos_lidos = []

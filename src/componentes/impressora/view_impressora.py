@@ -25,3 +25,10 @@ class ImpressoraView:
         self.enviar_impressao = ft.ElevatedButton(
         'Enviar impressão', on_click=lambda e: self.logicaImpressora.prepara_dados_para_impressao(self.tipo_etiqueta.value))
         
+        return ft.Column(
+            controls=[
+            self.input_codigo,
+            self.tipo_etiqueta,
+            self.enviar_impressao,
+            ]
+        )

@@ -1,6 +1,5 @@
 from flet import *
-from navegacao.logica_navegacao import paginaEscolhida
-
+from componentes.impressora.view_impressora import ImpressoraView
 class Navegador:
     def __init__(self,page:Page):
         self.page = page
@@ -8,8 +7,18 @@ class Navegador:
             destinations=[
                 NavigationBarDestination(icon=icons.HOME, label="Home"),
                 NavigationBarDestination(icon=icons.PRINT, label="Impressora"),
+                NavigationBarDestination(icon=icons.ADD_SHOPPING_CART_ROUNDED, label='Produtos')
             ],
-            on_change=paginaEscolhida
+            on_change=self.paginaEscolhida
         )
     def nav(self):
         return self.navbar
+    
+    def paginaEscolhida(self, e):
+        self.page.controls.clear()
+        if e.control.selected_index == 0:
+            pass
+        elif e.control.selected_index == 1:
+            print( e.control.selected_index )
+            page_impressora = ImpressoraView(self.page)
+            self.page.add(page_impressora.componenetes())
