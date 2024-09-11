@@ -1,7 +1,7 @@
 import flet as ft
 from busca_produtos import *
 from impressao import *
-
+from adiciona_produtos import *
 itens_lidos = []
 cards_list = ft.GridView(
     expand=True,
@@ -79,7 +79,8 @@ def main(page: ft.Page):
         label="Escaneie o código do produto",
         bgcolor='#525252', color="#fafa3c", on_submit=pesquisa_codigo, autofocus=True
     )
-
+    
+    
     def prepara_dados_para_impressao(e):
         quantidade = input_quantidade_por_produto.value
         eti = tipo_etiqueta.value
@@ -112,5 +113,27 @@ def main(page: ft.Page):
                         input_quantidade_por_produto, enviar_impressao, cards_list]
     page.add(*lista_homePage)
 
-
-ft.app(main)
+def pagina_tabelas(page:ft.Page):
+    page.title = "Tabelas"
+    colunas = []
+    data = extrai_dados_xml()
+    for valores in data:
+        nome = ft.TextField(value=valores['nome'])
+        codigo = ft.TextField(value=valores['codigo_de_barras'])
+        preco_unitario= ft.TextField(value=float(valores['valor_unitario_comercial']))
+        preco_revenda=ft.TextField(value=float(valores['valor_unitario_comercial']))
+        colunas.append(ft.DataRow(cells=[
+            ft.DataCell(nome),
+            ft.DataCell(codigo),
+            ft.DataCell(preco_unitario),
+            ft.DataCell(preco_revenda)
+            ]))
+        
+    tabela = ft.DataTable(
+        width=700,
+        columns=[ft.DataColumn(ft.Text('Nome do produto')), ft.DataColumn(ft.Text('Codigo de barras')), ft.DataColumn(ft.Text('preco unitario')), ft.DataColumn(ft.Text('Preco de revenda'))
+        ],
+        rows=colunas
+    )
+    page.add(tabela)
+ft.app(pagina_tabelas)

@@ -44,7 +44,8 @@ def tratamento_de_quantidade_valor_un(vProd, qCom):
     return valor_unitario
 
 
-def extrai_dados_xml(arquivo_xml):
+def extrai_dados_xml():
+    arquivo_xml = abre_explorador_de_arquivo_apenas_xml()
     data = []
     try:
         tree = ET.parse(arquivo_xml)  # Carrega a árvore XML
@@ -106,6 +107,3 @@ def extrai_dados_xml(arquivo_xml):
         print(f'O erro foi devido ao {e}')
 
 
-data = extrai_dados_xml('novos produtos.xml')
-
-print(data)
