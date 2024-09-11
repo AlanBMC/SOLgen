@@ -1,5 +1,6 @@
 from flet import *
-from src.navegacao.logica_navegacao import paginaEscolhida
+from navegacao.logica_navegacao import paginaEscolhida
+
 class Navegador:
     def __init__(self,page:Page):
         self.page = page
@@ -10,3 +11,5 @@ class Navegador:
             ],
             on_change=paginaEscolhida
         )
+    def nav(self):
+        return self.navbar
