@@ -1,7 +1,7 @@
 import flet as ft
 from busca_produtos import *
 from impressao import *
-from tabelas_de_produtos import pagina_tabelas
+from adiciona_produtos import * 
 itens_lidos = []
 cards_list = ft.GridView(
     expand=True,
@@ -26,7 +26,16 @@ def main(page: ft.Page):
         for homes in lista_homePage:
             page.add(homes)
         page.update()
-
+    def PageViewTables(e):
+        for i in lista_impressora:
+            if i in page.controls:
+                page.remove(i)
+        for homes in lista_homePage:
+            if homes in page.controls:
+                page.remove(homes)
+        for componente_PageTables in lista_componentes_TablesView:
+            page.add(componente_PageTables)
+        page.update()
     def excluir_produto(e):
         produto = e.control.data
         if produto in itens_lidos:
@@ -106,14 +115,64 @@ def main(page: ft.Page):
 
     enviar_impressao = ft.ElevatedButton(
         'Enviar impressão', on_click=prepara_dados_para_impressao)
+    
     tabela, botao_tipo_de_visualizacao = pagina_tabelas(page)
+    botao_page_data = ft.ElevatedButton('Importacao de dados', on_click=PageViewTables)
     homePage = ft.ElevatedButton("HomePage", on_click=homepage)
+
+    lista_componentes_TablesView = [tabela, botao_tipo_de_visualizacao, homePage]
+
     lista_homePage = [ft.Row([ft.ElevatedButton(
-        "Impressora", on_click=impressoras), homePage, tabela, botao_tipo_de_visualizacao ])]
+        "Impressora", on_click=impressoras), homePage, botao_page_data ])]
     lista_impressora =[homePage,input_codigo, tipo_etiqueta,
                         input_quantidade_por_produto, enviar_impressao, cards_list]
     page.add(*lista_homePage)
 
+
+def pagina_tabelas(page):
+    page.title = "Tabelas"
+    colunas = []
+    data_novo = None
+    def tipo_arquivo(e):
+        nonlocal data_novo
+        data_novo = extrai_dados_xml()
+        atualizar_tabela()
+        page.update()
+
+
+    
+    def atualizar_tabela():
+        nonlocal colunas
+        colunas.clear()  # Limpa as colunas anteriores
+        if data_novo:
+            for valores in data_novo:
+                nome = ft.TextField(value=valores['nome'], color='#191810')
+                codigo = ft.TextField(value=valores['codigo_de_barras'], color='#191810')
+                preco_unitario = ft.TextField(value=float(valores['valor_unitario_comercial']), color='#191810')
+                preco_revenda = ft.TextField(value=float(valores['valor_total']), color='#191810')
+                colunas.append(ft.DataRow(cells=[
+                    ft.DataCell(nome),
+                    ft.DataCell(codigo),
+                    ft.DataCell(preco_unitario),
+                    ft.DataCell(preco_revenda)
+                ]))
+    tipo_de_arquivo = ft.ElevatedButton('XML', on_click=tipo_arquivo)
+
+    tabela = ft.DataTable(
+        width=700,
+        bgcolor='#f0e162',
+        data_row_color='#9c9c9c',
+        columns=[ft.DataColumn(ft.Text('Nome do produto', color='#191810')), ft.DataColumn(ft.Text('Codigo de barras', color='#191810')), ft.DataColumn(ft.Text('preco unitario', color='#191810')), ft.DataColumn(ft.Text('Preco de revenda', color='#191810'))
+        ],
+        rows=colunas
+    )
+    page.update()
+    coluna_com_scroll = ft.Column(
+        controls=[tabela],
+        scroll="always",  # Ativa o scroll vertical
+        expand=True  # Expande a coluna para ocupar o espaço disponível
+    )
+    return coluna_com_scroll, tipo_de_arquivo
 
 
 ft.app(main)
