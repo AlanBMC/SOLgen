@@ -46,7 +46,7 @@ htmlcov/
 nosetests.xml
 coverage.xml
 novos produtos.xml
-
+*.pdf
 *.cover
 *.py,cover
 .hypothesis/

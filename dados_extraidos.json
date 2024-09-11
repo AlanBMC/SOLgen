@@ -155,6 +155,11 @@
         "preco": "R$ 10,00"
     },
     {
+        "nome": "- A/B BASE LIQUIDA HOT",
+        "codigo": "6930249989733",
+        "preco": "R$ 10,00"
+    },
+    {
         "nome": "- ABAJUR C/ CONE",
         "codigo": "7890655092948",
         "preco": "R$ 15,00"
@@ -365,6 +370,11 @@
         "preco": "R$ 3,00"
     },
     {
+        "nome": "- AGUA MICELAR\nPHALLEBEAUTY",
+        "codigo": "7898466606347",
+        "preco": "R$ 10,00"
+    },
+    {
         "nome": " - AGUA NUCLEAR PHALLE\nBEAUTY 200ML",
         "codigo": "7898449400023",
         "preco": "R$ 12,00"
@@ -438,6 +448,11 @@
         "nome": "- ANEL DE VEDAO\nUNIVERSAL CAIXA ACLOPADA",
         "codigo": "7898550250821",
         "preco": "R$ 4,20"
+    },
+    {
+        "nome": "- ANGELS PALETA DE\nSOMBRA",
+        "codigo": "6958741973838",
+        "preco": "R$ 13,00"
     },
     {
         "nome": "- ANIMAIS ANTI STRESS\nOLHOS ESBUGALHADOS LW19-71",
@@ -1285,6 +1300,11 @@
         "preco": "R$ 8,50"
     },
     {
+        "nome": "- BATOM MAGICO 24H PINK\n21",
+        "codigo": "7899360242693",
+        "preco": "R$ 11,00"
+    },
+    {
         "nome": " - BATOM MAGICO VERDE",
         "codigo": "7908417504216",
         "preco": "R$ 2,50"
@@ -1458,6 +1478,11 @@
         "nome": "- BLUSAS DE FRIO",
         "codigo": "7900067754263",
         "preco": "R$ 25,00"
+    },
+    {
+        "nome": "- BOBBI RARA MATTE\nLIPSTICK",
+        "codigo": "6972071001429",
+        "preco": "R$ 7,00"
     },
     {
         "nome": "- BOCA MALUCA INFANTIL\nDINO LEGAL COLOR JY1107",
@@ -2013,6 +2038,11 @@
         "nome": "- BROCA MECHA DE WALT\n13,0MM",
         "codigo": "7897451460490",
         "preco": "R$ 10,80"
+    },
+    {
+        "nome": "- BROW SOAP CITY GIRLS",
+        "codigo": "7908644406598",
+        "preco": "R$ 9,00"
     },
     {
         "nome": " - BRUMA ACELERADORA\nDE COLA P/ EXTENSAO",
@@ -2700,6 +2730,11 @@
         "preco": "R$ 2,00"
     },
     {
+        "nome": "- CANETA\nDELINEADORA/BOBI RARA",
+        "codigo": "6944568910040",
+        "preco": "R$ 4,00"
+    },
+    {
         "nome": "- CANETA DETECTORA DE\nNOTA FALSA",
         "codigo": "7892021110836",
         "preco": "R$ 5,00"
@@ -3185,6 +3220,11 @@
         "preco": "R$ 6,75"
     },
     {
+        "nome": "- CILIOS 3D",
+        "codigo": "6926641002002",
+        "preco": "R$ 9,00"
+    },
+    {
         "nome": "- CINTO",
         "codigo": "7900416147791",
         "preco": "R$ 10,00"
@@ -3448,6 +3488,11 @@
         "nome": " - COLORACAO\nHIDRATIPLIFE PROFISSIONAL",
         "codigo": "7898957674251",
         "preco": "R$ 8,00"
+    },
+    {
+        "nome": "- COLORS BATOM MATTE",
+        "codigo": "7892921329222",
+        "preco": "R$ 8,50"
     },
     {
         "nome": "- COLOSSAL FEBELLA",
@@ -3760,6 +3805,11 @@
         "preco": "R$ 5,00"
     },
     {
+        "nome": "- CORRETIVO LIQUIDO\nMATTE",
+        "codigo": "6799205093118",
+        "preco": "R$ 9,00"
+    },
+    {
         "nome": "- CORTADOR 3 PEAS\nCORACAO TRAMONTINA - NAOUSAR",
         "codigo": "111111111111",
         "preco": "R$ 10,00"
@@ -3788,6 +3838,11 @@
         "nome": " - CORTADOR DE PIZZA",
         "codigo": "7896502820146",
         "preco": "R$ 10,00"
+    },
+    {
+        "nome": "- CORTADOR DE UNHAS\nAOYASIYUE",
+        "codigo": "7899203953205",
+        "preco": "R$ 4,00"
     },
     {
         "nome": "- CORTINA BLACKOUT COM\nVOIL",
@@ -3935,6 +3990,11 @@
         "preco": "R$ 3,00"
     },
     {
+        "nome": "- DELINEADOR LIQUIDO\nPRETO",
+        "codigo": "7899956857065",
+        "preco": "R$ 8,00"
+    },
+    {
         "nome": " - DEPILADOR ELETRICA",
         "codigo": "7833556604612",
         "preco": "R$ 25,00"
@@ -3963,6 +4023,11 @@
         "nome": "- DETECTOR DE PRESENA",
         "codigo": "7891435056655",
         "preco": "R$ 32,00"
+    },
+    {
+        "nome": "- DIAMOND LIP GLOSS",
+        "codigo": "6974482521015",
+        "preco": "R$ 9,00"
     },
     {
         "nome": "- DINOSSAURO À PILHA\nCOM MOVIMENTO LUZ EDMT6825",
@@ -4275,6 +4340,11 @@
         "preco": "R$ 7,00"
     },
     {
+        "nome": "- ESFOLIANTE FACIAL\nROSA",
+        "codigo": "7898970341307",
+        "preco": "R$ 6,00"
+    },
+    {
         "nome": "- ESFOLIANTE ROSA\nMOSQUETA",
         "codigo": "7898970341307",
         "preco": "R$ 8,50"
@@ -4348,6 +4418,11 @@
         "nome": " - ESPETO SIMPLES CABO\nDE MADEIRA 95CM",
         "codigo": "7898901928058",
         "preco": "R$ 8,00"
+    },
+    {
+        "nome": "- ESPONJA GOTA\nCHANFFADO/CABANA",
+        "codigo": "6958214531169",
+        "preco": "R$ 6,00"
     },
     {
         "nome": "- ESPONJA MAGICA SCOTH\nBRITE",
@@ -4573,6 +4648,16 @@
         "nome": "- FECHO P/ PORTO - NAO\nUSAR",
         "codigo": "111111111111",
         "preco": "R$ 10,00"
+    },
+    {
+        "nome": "- FEMME LAPIS DE OLHO",
+        "codigo": "7899738900736",
+        "preco": "R$ 4,00"
+    },
+    {
+        "nome": "- FEMME LAPIS DE OLHO\nMARROM",
+        "codigo": "7899738900224",
+        "preco": "R$ 4,00"
     },
     {
         "nome": "- FERRAMENTA",
@@ -5133,6 +5218,11 @@
         "nome": " - GEL CONSTRUTOR P/\nUNHA - NAO USAR",
         "codigo": "111111111111",
         "preco": "R$ 8,00"
+    },
+    {
+        "nome": "- GEL ESFOLIANTE\nPHALLEBEAUTY",
+        "codigo": "7898449400368",
+        "preco": "R$ 6,00"
     },
     {
         "nome": " - GEL REMOVEDOR DE\nCILIOS",
@@ -6210,6 +6300,16 @@
         "preco": "R$ 34,40"
     },
     {
+        "nome": "- LIP GLOSS",
+        "codigo": "6937007100058",
+        "preco": "R$ 8,00"
+    },
+    {
+        "nome": "- LIP GLOW",
+        "codigo": "7898508021732",
+        "preco": "R$ 26,00"
+    },
+    {
         "nome": "- LIP TINT BELLE",
         "codigo": "6921497121846",
         "preco": "R$ 8,50"
@@ -6363,6 +6463,16 @@
         "nome": "- LOVE PALLET FEBELLA",
         "codigo": "7891057910892",
         "preco": "R$ 12,90"
+    },
+    {
+        "nome": "- LOVE RAIN BATOM\nLIPSTICK",
+        "codigo": "6971903020058",
+        "preco": "R$ 5,00"
+    },
+    {
+        "nome": "- LUA E NEVE MERMAID\nBRILHO",
+        "codigo": "6930249940512",
+        "preco": "R$ 9,00"
     },
     {
         "nome": "- LUDO UNICA",
@@ -6585,6 +6695,11 @@
         "preco": "R$ 5,00"
     },
     {
+        "nome": "- MASCA FACIL LOVE -\nCAVIAR",
+        "codigo": "7908240510170",
+        "preco": "R$ 2,00"
+    },
+    {
         "nome": " - MASCARA FACIL PEPINO",
         "codigo": "8809071360851",
         "preco": "R$ 10,00"
@@ -6602,6 +6717,11 @@
     {
         "nome": " - MÁSCARA V DE\nVINGANÇA",
         "codigo": "7895050091657",
+        "preco": "R$ 8,00"
+    },
+    {
+        "nome": "- MASCARA VOLUNA\nEXTRA",
+        "codigo": "7899360227737",
         "preco": "R$ 8,00"
     },
     {
@@ -6855,6 +6975,11 @@
         "preco": "R$ 25,00"
     },
     {
+        "nome": "- MOUSSE SKIN ACIDO\nHIALURONICO",
+        "codigo": "7899360263025",
+        "preco": "R$ 13,00"
+    },
+    {
         "nome": "- MSCARA V DE VINGANA -\nNAO USAR",
         "codigo": "111111111111",
         "preco": "R$ 8,00"
@@ -7052,17 +7177,17 @@
     {
         "nome": " - OCULOS DE SOL 51131",
         "codigo": "7897960762597",
-        "preco": "R$ 13,10"
+        "preco": "R$ 15,00"
     },
     {
         "nome": " - OCULOS DE SOL\nINFANTIL 3022",
         "codigo": "7906470301292",
-        "preco": "R$ 8,50"
+        "preco": "R$ 10,00"
     },
     {
         "nome": " - OCULOS DE SOL\nINFANTIL AM378",
         "codigo": "7891000156957",
-        "preco": "R$ 8,50"
+        "preco": "R$ 10,00"
     },
     {
         "nome": " - OCULOS FASHION",
@@ -7072,12 +7197,12 @@
     {
         "nome": " - OCULOS MASCARA\nESPORTIVA",
         "codigo": "7906071896746",
-        "preco": "R$ 13,10"
+        "preco": "R$ 15,00"
     },
     {
         "nome": " - OCULOS MODERNO",
         "codigo": "7905118743531",
-        "preco": "R$ 13,10"
+        "preco": "R$ 15,00"
     },
     {
         "nome": " - OCULOS PROTEÇÃO",
@@ -7895,6 +8020,11 @@
         "preco": "R$ 15,00"
     },
     {
+        "nome": "- PHALLEBEAUTY\nMASCARA FACIAL",
+        "codigo": "7898566827017",
+        "preco": "R$ 3,00"
+    },
+    {
         "nome": "- PIÃO COM LANÇADOR 02\nPEÇAS COM LUZ AKT4071",
         "codigo": "7899763207374",
         "preco": "R$ 4,85"
@@ -8153,6 +8283,11 @@
         "nome": " PMG RETANGULAR DECOR\n300/ 700/ 1,4L (MONTADOS)",
         "codigo": "7898635510697",
         "preco": "R$ 7,80"
+    },
+    {
+        "nome": "- PO BANANA FENZZA",
+        "codigo": "7899360239495",
+        "preco": "R$ 8,00"
     },
     {
         "nome": "- PÓ COMPACTO CLASSIC",
@@ -8888,6 +9023,16 @@
         "nome": " - PRIME FACIAL",
         "codigo": "7896609535127",
         "preco": "R$ 8,00"
+    },
+    {
+        "nome": "- PRIMER D-PANTENOL\nMAX LOVE",
+        "codigo": "7908240514369",
+        "preco": "R$ 9,00"
+    },
+    {
+        "nome": "- PRIMER HD AMX LOVE",
+        "codigo": "7908240514222",
+        "preco": "R$ 9,00"
     },
     {
         "nome": " PROCESSADOR DE ALHO",
@@ -9840,6 +9985,11 @@
         "preco": "R$ 6,80"
     },
     {
+        "nome": "- SOMBRA DUO RUBYROSE",
+        "codigo": "6932159605918",
+        "preco": "R$ 12,00"
+    },
+    {
         "nome": "- SOQUETE COM RABICHO\nPRETO",
         "codigo": "7898629661510",
         "preco": "R$ 2,80"
@@ -9973,6 +10123,11 @@
         "nome": "- SUPER BINGO UNICA",
         "codigo": "7908470012994",
         "preco": "R$ 38,00"
+    },
+    {
+        "nome": "- SUPER EFFECT MASCARA\nAPROVA DE AGUA",
+        "codigo": "6921497130718",
+        "preco": "R$ 13,00"
     },
     {
         "nome": " - SUPER NECESSARIA",
@@ -10718,6 +10873,11 @@
         "nome": "- trinco unidade",
         "codigo": "7898357761735",
         "preco": "R$ 2,00"
+    },
+    {
+        "nome": "- TRIO CONTORNO BLUSH",
+        "codigo": "7899360240811",
+        "preco": "R$ 6,00"
     },
     {
         "nome": "- tripe p/ ringue light",

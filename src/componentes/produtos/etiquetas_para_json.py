@@ -3,7 +3,6 @@ import json
 import re
 
 
-arquivo_pdf = 'nova_etiqueta1.pdf'
 
 
 
@@ -49,4 +48,3 @@ def extrai_dados(arquivo_pdf):
     print(json.dumps(dados, ensure_ascii=False, indent=4))
 
 # Exemplo de uso
-extrai_dados(arquivo_pdf)
