@@ -116,7 +116,7 @@ def main(page: ft.Page):
 
 
 
-def pagina_tabelas(page:ft.Page):
+def pagina_tabelas(page):
     page.title = "Tabelas"
     colunas = []
     data_novo = None
@@ -136,7 +136,7 @@ def pagina_tabelas(page:ft.Page):
                 nome = ft.TextField(value=valores['nome'], color='#191810')
                 codigo = ft.TextField(value=valores['codigo_de_barras'], color='#191810')
                 preco_unitario = ft.TextField(value=float(valores['valor_unitario_comercial']), color='#191810')
-                preco_revenda = ft.TextField(value=float(valores['valor_revenda']), color='#191810')
+                preco_revenda = ft.TextField(value=float(valores['valor_total']), color='#191810')
                 colunas.append(ft.DataRow(cells=[
                     ft.DataCell(nome),
                     ft.DataCell(codigo),
@@ -160,4 +160,7 @@ def pagina_tabelas(page:ft.Page):
         expand=True  # Expande a coluna para ocupar o espaço disponível
     )
     return coluna_com_scroll, tipo_de_arquivo
+
+
+
 ft.app(main)
