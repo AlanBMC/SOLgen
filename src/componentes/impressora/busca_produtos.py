@@ -1,6 +1,6 @@
 import json
 try:
-    with open('dados_extraidos.json', encoding='utf-8') as data_json:
+    with open('C:/Users/alanb/OneDrive/Área de Trabalho/SOLgen/SOLgen/src/json/dados_extraidos.json', encoding='utf-8') as data_json:
         data = json.load(data_json)
 
 except FileNotFoundError:

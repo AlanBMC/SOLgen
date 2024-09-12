@@ -1,5 +1,5 @@
 import flet as ft
-from busca_produtos import *
+from src.componentes.impressora.busca_produtos import *
 from impressao import *
 from adiciona_produtos import * 
 itens_lidos = []

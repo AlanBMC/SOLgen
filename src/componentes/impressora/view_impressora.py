@@ -4,11 +4,21 @@ from componentes.impressora.logica_impressora import ImpressoraLogica
 class ImpressoraView:
     def __init__(self, page):
         self.page = page
-        self.logicaImpressora = ImpressoraLogica()
+        self.cards_list = ft.GridView(
+            expand=True,
+            max_extent=200,  # Width of each card
+            spacing=10,
+            run_spacing=10,
+            child_aspect_ratio=1
+        )
+        self.logicaImpressora = ImpressoraLogica(self.adiciona_card, self.atualizar_cards)
+
     def componenetes(self):
         """
         metodos de componenetes dsa pagina impressora
         """
+
+
         self.input_codigo = ft.TextField(
         label="Escaneie o código do produto",
         bgcolor='#525252', color="#fafa3c", on_submit=self.logicaImpressora.pesquisa_codigo, autofocus=True
