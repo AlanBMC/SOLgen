@@ -11,7 +11,7 @@ class ImpressoraView:
             run_spacing=10,
             child_aspect_ratio=1
         )
-        self.logicaImpressora = ImpressoraLogica(self.adiciona_card, self.atualizar_cards)
+        self.logicaImpressora = ImpressoraLogica(self.cards_list)
 
     def componenetes(self):
         """
@@ -40,5 +40,6 @@ class ImpressoraView:
             self.input_codigo,
             self.tipo_etiqueta,
             self.enviar_impressao,
+            self.cards_list
             ]
         )

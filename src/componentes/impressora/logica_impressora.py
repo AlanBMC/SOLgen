@@ -5,14 +5,12 @@ class ImpressoraLogica:
         self.produtos_lidos = []
         self.card_list = card_list
 
-
-
     def pesquisa_codigo(self,e):
         codigo = e.control.value.strip()
         produto = encontrar_produto_por_codigo(codigo)
         if produto and produto not in self.produtos_lidos:
             self.produtos_lidos.append(produto)
-            self.callback_adiciona_card(produto)
+            self.adiciona_card(produto)
             #adcionar card
         
     def prepara_dados_para_impressao(e,quantidade, tipo_etiqueta):
@@ -22,7 +20,7 @@ class ImpressoraLogica:
         produto = e.control.data
         if produto in self.produtos_lidos:
             self.produtos_lidos.remove(produto)
-            self.callback_atualizar_cards()
+            self.atualizar_cards()
 
     def adiciona_card(self,produto):
             card = ft.Card(
@@ -36,7 +34,7 @@ class ImpressoraLogica:
                         ft.Row(
                             [
                                 ft.ElevatedButton(
-                                    "Excluir", on_click=lambda e: self.logicaImpressora.excluir_produto(e,self.cards_list), data=produto)
+                                    "Excluir", on_click=self.excluir_produto, data=produto)
                             ],
                             alignment=ft.MainAxisAlignment.END
                         )
@@ -45,10 +43,11 @@ class ImpressoraLogica:
                 width=200, padding=10, bgcolor="#E9D345", border_radius=8
             ),
         )
-            self.cards_list.controls.append(card)
-            self.cards_list.update()
+            self.card_list.controls.append(card)
+            self.card_list.update()
+
     def atualizar_cards(self ):
-        self.cards_list.controls.clear()
+        self.card_list.controls.clear()
         for produto in self.produtos_lidos:
-            self.callback_adiciona_card(produto)
+            self.adiciona_card(produto)
         self.card_list.update()
