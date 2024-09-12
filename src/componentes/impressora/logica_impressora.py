@@ -1,5 +1,6 @@
 from componentes.impressora.busca_produtos import *
 import flet as ft 
+from componentes.impressora.impressao import envia_para_impressora
 class ImpressoraLogica:
     def __init__(self, card_list):
         self.produtos_lidos = []
@@ -13,9 +14,20 @@ class ImpressoraLogica:
             self.adiciona_card(produto)
             #adcionar card
         
-    def prepara_dados_para_impressao(e,quantidade, tipo_etiqueta):
-        pass
-       
+    def prepara_dados_para_impressao(self,e, tipo_etiqueta):
+        dados = []
+        for card in self.card_list.controls:
+            coluna = card.content.content  # Acessa a `Column` dentro do `Container`
+            nome = coluna.controls[0].value  # Primeiro Text (nome)
+            preco = coluna.controls[1].value  # Segundo Text (preço)
+            codigo = coluna.controls[2].value  # Terceiro Text (código)
+            produto = {
+                "nome": nome,
+                "preco": preco,
+                "codigo": codigo
+            }
+            dados.append(produto)
+        envia_para_impressora(dados, 1,  tipo_etiqueta.value)
     def excluir_produto(self,e):
         produto = e.control.data
         if produto in self.produtos_lidos:
