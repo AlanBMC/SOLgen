@@ -3,9 +3,10 @@ import win32con
 import ctypes
 import time
 from src.componentes.impressora.abre_Bardtender_e_retorna_handle import *
-from simulador_teclas import *
-from win_codigo import *
+from src.componentes.impressora.simulador_teclas import *
+from src.componentes.impressora.win_codigo import *
 from src.componentes.impressora.manda_imprimir import *
+
 # Definir as teclas que vamos simular
 TAB = win32con.VK_TAB
 ENTER = win32con.VK_RETURN

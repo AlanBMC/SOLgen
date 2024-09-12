@@ -1,8 +1,8 @@
-from win_codigo import *
+from src.componentes.impressora.win_codigo import *
 import win32gui,win32con
 from pywinauto import Application
 from impressao import *
-from simulador_teclas import *
+from src.componentes.impressora.simulador_teclas import *
 import time
 
 def find_imprimir_button_in_pane(parent_handle):
