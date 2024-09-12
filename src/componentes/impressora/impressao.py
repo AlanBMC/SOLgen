@@ -2,10 +2,10 @@ import win32gui
 import win32con
 import ctypes
 import time
-from src.componentes.impressora.abre_Bardtender_e_retorna_handle import *
-from src.componentes.impressora.simulador_teclas import *
-from src.componentes.impressora.win_codigo import *
-from src.componentes.impressora.manda_imprimir import *
+from componentes.impressora.abre_Bardtender_e_retorna_handle import *
+from componentes.impressora.simulador_teclas import *
+from componentes.impressora.win_codigo import *
+from componentes.impressora.manda_imprimir import *
 
 # Definir as teclas que vamos simular
 TAB = win32con.VK_TAB
