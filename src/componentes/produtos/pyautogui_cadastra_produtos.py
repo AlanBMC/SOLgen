@@ -79,8 +79,13 @@ def clica_cfop(cfop):
     Exemplo de uso:
         clica_cfop("5102")
     """
+    time.sleep(1)
     digita_texto(cfop)
-
+    time.sleep(1)
+    digita_texto(cfop)
+    time.sleep(1)
+    digita_texto(cfop)
+    time.sleep(1)
 
 def clica_ncm(ncm):
     """
@@ -112,7 +117,7 @@ def clica_nome(nome):
     cola_texto(nome)
 
 
-def clica_preco(preco):
+def clica_preco_revenda(preco):
     """
     Função para colar o valor do preço de venda em um campo específico.
     
@@ -142,6 +147,16 @@ def clica_preco_compra(preco_un):
     cola_texto(preco_un)
 
 
+def clica_codigo_de_barras(codigo):
+    """
+    Funcao reservado para simular o clique no input codigo
+    :return: Sem retorno
+    :Param: recebe o codigo de barras do produto
+    Exemplo de uso:
+        clica_codigo_de_barras('12345678910')
+    """
+
+
 def clica_salvar():
     """
     Função reservada para simular o clique no botão 'Salvar'.
@@ -155,3 +170,41 @@ def clica_salvar():
         clica_salvar()
     """
     pass
+
+
+def clica_novo_produto():
+    """
+    clica no botao novo
+    :return: Nenhum retorno.
+
+    """
+
+
+def manipula_dados(produtos):
+    """
+    Função para manipular os dados dos produtos.
+    recebe um dicionario com: nome, preco, codigo, ncm, cfop e precoUN
+    chama as funçoes para controlar o mouse e teclado
+    """
+    for dados in produtos:
+        time.sleep(1)
+        clica_novo_produto()
+        time.sleep(1)
+        clica_ok()
+        time.sleep(1)
+        clica_nome(dados['nome'])
+        time.sleep(1)
+        clica_codigo_de_barras(dados['codigo'])
+        time.sleep(1)
+        clica_preco_revenda(dados['preco'])
+        time.sleep(1)
+        clica_preco_compra(dados['precoUN'])
+        time.sleep(1)
+        clica_fiscal()
+        time.sleep(1)
+        clica_ncm(dados['ncm'])
+        time.sleep(1)
+        clica_cfop(dados['cfop'])
+        time.sleep(1)
+        clica_salvar()
+        time.sleep(1)

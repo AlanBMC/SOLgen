@@ -65,12 +65,15 @@ class LogicaProdutos:
                         cfop = celula.content.value
                     elif celula.content.keyboard_type == 'ncm':
                         ncm = celula.content.value
+                    elif celula.content.keyboard_type == 'precoUN':
+                        precoUN = celula.content.value
                     dicio_lista = {
                         'nome':nome,
                         'codigo_de_barras':codigo_de_barras,
                         'cfop':cfop,
                         'ncm':ncm,
-                        'preco':preco
+                        'preco':preco,
+                        'precoUN': precoUN
                     }
                     lista_produtos_para_cadatrastro.append(dicio_lista)
         print(lista_produtos_para_cadatrastro)
