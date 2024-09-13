@@ -44,13 +44,16 @@ class ProdutosView:
     def botoes_gui(self):
         valor_porcentagem = ft.TextField(label='Porcentagem', on_submit=self.logica_produtos.logica_porcentagem)
         cadastrar_produtos = ft.ElevatedButton('Cadastrar produtos', on_click=self.logica_produtos.cadastra_produtos)
+        adiciona_produto_vazio = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=self.logica_produtos.adiciona_produtos_vazio)
         self.tipo_de_arquivo = ft.ElevatedButton(
             'XML', on_click=self.logica_produtos.tipo_arquivo)
         self.botoes_colunas = ft.Column(
             controls=[
                 self.tipo_de_arquivo,
                 valor_porcentagem,
-                cadastrar_produtos
+                cadastrar_produtos,
+                adiciona_produto_vazio
+
                 
             ],
             alignment=ft.MainAxisAlignment.START

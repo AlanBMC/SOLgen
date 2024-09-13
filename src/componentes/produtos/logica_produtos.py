@@ -1,6 +1,7 @@
 from componentes.produtos.adiciona_produtos import *
 import flet as ft
-from math import ceil, floor
+from math import ceil
+from componentes.produtos.pyautogui_cadastra_produtos import manipula_dados
 
 import re
 class LogicaProdutos:
@@ -22,7 +23,7 @@ class LogicaProdutos:
                 codigo = ft.TextField(value=valores['codigo_de_barras'], color='#191810', keyboard_type='codigo')
                 cfop = ft.TextField(value=valores['cfop'], color='#191810', width=400, keyboard_type='cfop')
                 ncm = ft.TextField(value=valores['ncm'], color='#191810', keyboard_type='ncm')
-                preco_unitario = ft.TextField(value=float(valores['valor_unitario_comercial']), color='#191810', keyboard_type='preco_un')
+                preco_unitario = ft.TextField(value=float(valores['valor_unitario_comercial']), color='#191810', keyboard_type='precoUN')
                 preco_revenda_valor = float(valores['valor_unitario_comercial'])
                 if self.porcetagem:
                     preco_revenda_valor *= float(self.porcetagem)
@@ -37,6 +38,7 @@ class LogicaProdutos:
                     ft.DataCell(ncm),
                      ft.DataCell(cfop)
                 ]))
+
             self.page.update()
     def logica_porcentagem(self, e):
         self.porcetagem = re.sub(r'[^0-9.%]', '', e.control.value)
@@ -44,6 +46,29 @@ class LogicaProdutos:
         self.atualizar_tabela()
         self.page.update()
 
+
+    
+    def adiciona_produtos_vazio(self,e):
+        """
+        Adiciona uma linha de produto com campos vazios na tabela.
+        """
+        nome = ft.TextField(value="", color='#191810', bgcolor='#e4e4ac',keyboard_type='nome')
+        codigo = ft.TextField(value="", color='#191810',bgcolor='#e4e4ac', keyboard_type='codigo')
+        cfop = ft.TextField(value="", color='#191810',bgcolor='#e4e4ac', width=400, keyboard_type='cfop')
+        ncm = ft.TextField(value="", color='#191810',width=250,bgcolor='#e4e4ac', keyboard_type='ncm')
+        preco_unitario = ft.TextField(value="", color='#191810', bgcolor='#e4e4ac',keyboard_type='precoUN')
+        preco_revenda = ft.TextField(value="", color='#191810', bgcolor='#e4e4ac',keyboard_type='preco_revenda')
+
+        # Adiciona a linha de produto com campos vazios à tabela
+        self.colunas.append(ft.DataRow(cells=[
+            ft.DataCell(nome),
+            ft.DataCell(codigo),
+            ft.DataCell(preco_unitario),
+            ft.DataCell(preco_revenda),
+            ft.DataCell(ncm),
+            ft.DataCell(cfop)
+        ]))
+        self.page.update()
     def cadastra_produtos(self, e):
         lista_produtos_para_cadatrastro = []
         nome = ""
@@ -51,6 +76,7 @@ class LogicaProdutos:
         codigo_de_barras = ""
         cfop = ""
         ncm = ""
+        precoUN = ''
     
         for linha in self.colunas:
             for celula in linha.cells:
@@ -76,4 +102,5 @@ class LogicaProdutos:
                         'precoUN': precoUN
                     }
                     lista_produtos_para_cadatrastro.append(dicio_lista)
-        print(lista_produtos_para_cadatrastro)
+        manipula_dados(lista_produtos_para_cadatrastro)
+    

@@ -14,7 +14,6 @@ def  abre_base_de_dados_json():
 
 def adiciciona_produtos_json(dados_novos, data_json):
     
-
     with open('dados teste insercao.json', 'w', encoding='utf-8') as json_file:
         json.dump(data_json, json_file, ensure_ascii=False, indent=4)
 
@@ -24,6 +23,7 @@ def adiciciona_produtos_json(dados_novos, data_json):
 def abre_explorador_de_arquivo_apenas_xml():
     root = tk.Tk()
     root.withdraw()
+    root.attributes('-topmost', True)
     arquivo_selecionado = filedialog.askopenfilename(
         title='Selecioine o arquivo XML',
         filetypes=(('Arquivo XML', '*.xml'), ('Todos os arquivos', '*.*'))

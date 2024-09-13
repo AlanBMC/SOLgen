@@ -2,10 +2,6 @@ import pdfplumber
 import json
 import re
 
-
-
-
-
 def extrai_dados(arquivo_pdf):
     dados = []
     with pdfplumber.open(arquivo_pdf) as pdf:
@@ -41,7 +37,7 @@ def extrai_dados(arquivo_pdf):
 # Exemplo de uso
 
                            
-    with open('dados_extraidos.json', 'w', encoding='utf-8') as json_file:
+    with open('./SOLgen/src/json/dados_extraidos.json', 'w', encoding='utf-8') as json_file:
         json.dump(dados, json_file, ensure_ascii=False, indent=4)
 
     # Exibe os dados salvos para confirmação
