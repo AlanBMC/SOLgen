@@ -8,10 +8,16 @@ class ProdutosView:
         self.colunas_produtos = []
         self.logica_produtos = LogicaProdutos(self.page,self.colunas_produtos)
         self.tabela = ft.DataTable(
-            width=700,
+            width=800,
             bgcolor='#f0e162',
-            data_row_color='#9c9c9c',
-            columns=[ft.DataColumn(ft.Text('Nome do produto', color='#191810')), ft.DataColumn(ft.Text('Codigo de barras', color='#191810')), ft.DataColumn(ft.Text('preco unitario', color='#191810')), ft.DataColumn(ft.Text('Preco de revenda', color='#191810'))
+            heading_row_height=100,
+            data_row_color='#d6d66e',
+            columns=[ft.DataColumn(ft.Text('Nome do produto', color='#191810')),
+                      ft.DataColumn(ft.Text('Codigo de barras', color='#191810')),
+                        ft.DataColumn(ft.Text('preco unitario', color='#191810')),
+                          ft.DataColumn(ft.Text('Preco de revenda', color='#191810')),
+                          ft.DataColumn(ft.Text('NCM', color='#191810')),
+                          ft.DataColumn(ft.Text('CFOP', color='#191810')),
                      ],
             rows=self.colunas_produtos
         )
@@ -37,12 +43,15 @@ class ProdutosView:
 
     def botoes_gui(self):
         valor_porcentagem = ft.TextField(label='Porcentagem', on_submit=self.logica_produtos.logica_porcentagem)
+        cadastrar_produtos = ft.ElevatedButton('Cadastrar produtos', on_click=self.logica_produtos.cadastra_produtos)
         self.tipo_de_arquivo = ft.ElevatedButton(
             'XML', on_click=self.logica_produtos.tipo_arquivo)
         self.botoes_colunas = ft.Column(
             controls=[
                 self.tipo_de_arquivo,
-                valor_porcentagem
+                valor_porcentagem,
+                cadastrar_produtos
+                
             ],
             alignment=ft.MainAxisAlignment.START
         )
