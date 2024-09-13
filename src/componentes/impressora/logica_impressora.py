@@ -8,12 +8,14 @@ class ImpressoraLogica:
 
     def pesquisa_codigo(self,e):
         codigo = e.control.value.strip()
+        e.control.value = ""
+        e.control.focus() 
         produto = encontrar_produto_por_codigo(codigo)
         if produto and produto not in self.produtos_lidos:
             self.produtos_lidos.append(produto)
             self.adiciona_card(produto)
             #adcionar card
-        
+        e.page.update()
     def prepara_dados_para_impressao(self,e, tipo_etiqueta):
         dados = []
         for card in self.card_list.controls:

@@ -57,6 +57,7 @@ def clicar_botao_imprimir(copias):
 
     if botao_imprimir.exists():
         botao_imprimir.click()  # Clicar no botão
+        
         print("Botão 'Imprimir' clicado.")
         return True
     else:
