@@ -1,7 +1,7 @@
 import flet as ft
 from src.componentes.impressora.busca_produtos import *
 from impressao import *
-from adiciona_produtos import * 
+from SOLgen.src.componentes.produtos.adiciona_produtos import * 
 itens_lidos = []
 cards_list = ft.GridView(
     expand=True,

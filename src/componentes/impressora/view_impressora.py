@@ -43,3 +43,4 @@ class ImpressoraView:
             self.cards_list
             ]
         )
+    
