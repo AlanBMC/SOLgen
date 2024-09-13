@@ -2,26 +2,50 @@ import flet as ft
 from componentes.produtos.logica_produtos import *
 
 
-
-class ViewProdutos:
+class ProdutosView:
     def __init__(self, page):
         self.page = page
         self.colunas_produtos = []
-        self.logica_produtos = LogicaProdutos()
+        self.logica_produtos = LogicaProdutos(self.page,self.colunas_produtos)
         self.tabela = ft.DataTable(
-                width=700,
-                bgcolor='#f0e162',
-                data_row_color='#9c9c9c',
-                columns=[ft.DataColumn(ft.Text('Nome do produto', color='#191810')), ft.DataColumn(ft.Text('Codigo de barras', color='#191810')), ft.DataColumn(ft.Text('preco unitario', color='#191810')), ft.DataColumn(ft.Text('Preco de revenda', color='#191810'))
-                ],
-                rows=self.colunas_produtos
-            )
-        self.tipo_de_arquivo = ft.ElevatedButton('XML', on_click=self.logica_produtos.tipo_arquivo)
+            width=700,
+            bgcolor='#f0e162',
+            data_row_color='#9c9c9c',
+            columns=[ft.DataColumn(ft.Text('Nome do produto', color='#191810')), ft.DataColumn(ft.Text('Codigo de barras', color='#191810')), ft.DataColumn(ft.Text('preco unitario', color='#191810')), ft.DataColumn(ft.Text('Preco de revenda', color='#191810'))
+                     ],
+            rows=self.colunas_produtos
+        )
+        self.tipo_de_arquivo = ft.ElevatedButton(
+            'XML', on_click=self.logica_produtos.tipo_arquivo)
+
     def componentes(self):
-        self.page.update()
+        self.tabela_gui()
+        self.botoes_gui()
+        return self.layoutGeral()
+    
+
+    def tabela_gui(self):
         self.coluna_com_scroll = ft.Column(
-        controls=[self.tabela],
-        scroll="always",  # Ativa o scroll vertical
-        expand=True  # Expande a coluna para ocupar o espaço disponível
+            controls=[self.tabela],
+            scroll="always",  # Ativa o scroll vertical
+            expand=True  # Expande a coluna para ocupar o espaço disponível
+        )
+
+
+    def botoes_gui(self):
+        self.botoes_colunas = ft.Column(
+            controls=[
+                self.tipo_de_arquivo,
+            ],
+            alignment=ft.MainAxisAlignment.START
+        )
+
+    def layoutGeral(self):
+        self.layout_geral = ft.Row(
+        controls=[
+            self.botoes_colunas,       # Botões à direita
+            self.coluna_com_scroll  # Tabela à esquerda
+        ],
+        vertical_alignment=ft.CrossAxisAlignment.START  # Alinha os itens ao topo da linha
     )
-        return self.coluna_com_scroll, self.tipo_de_arquivo
+        return self.layout_geral

@@ -13,7 +13,7 @@ class ImpressoraView:
         )
         self.logicaImpressora = ImpressoraLogica(self.cards_list)
 
-    def componenetes(self):
+    def componentes(self):
         """
         metodos de componenetes dsa pagina impressora
         """

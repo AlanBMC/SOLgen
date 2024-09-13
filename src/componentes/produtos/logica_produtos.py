@@ -1,12 +1,13 @@
 from componentes.produtos.adiciona_produtos import *
 import flet as ft
 class LogicaProdutos:
-    def __init__(self, colunas):
+    def __init__(self, page,colunas):
         self.data_produtos = []
         self.colunas = colunas
+        self.page = page
 
 
-    def tipo_arquivo(self):
+    def tipo_arquivo(self,e):
         self.data_produtos = extrai_dados_xml()
         self.atualizar_tabela()
 
@@ -23,3 +24,4 @@ class LogicaProdutos:
                     ft.DataCell(preco_unitario),
                     ft.DataCell(preco_revenda)
                 ]))
+            self.page.update()
