@@ -14,7 +14,7 @@ class ImpressoraLogica:
         if produto and produto not in self.produtos_lidos:
             self.produtos_lidos.append(produto)
             self.adiciona_card(produto)
-            #adcionar card
+            #adcionar card 
         e.page.update()
     def prepara_dados_para_impressao(self,e, tipo_etiqueta):
         dados = []
