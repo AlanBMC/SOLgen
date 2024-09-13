@@ -44,7 +44,7 @@ def tratamento_de_quantidade_valor_un(vProd, qCom):
     return valor_unitario
 
 
-def extrai_dados_xml():
+def  extrai_dados_xml():
     arquivo_xml = abre_explorador_de_arquivo_apenas_xml()
     data = []
     try:
@@ -91,6 +91,7 @@ def extrai_dados_xml():
                     'unidade_comercial': unidade_comercial,
                     'quantidade_comercial': quantidade_comercial,
                     'valor_unitario_comercial': valor_unitario_comercial,
+                    'valor_revenda':valor_unitario_comercial,
                     'valor_total': valor_total
                 }
                 data.append(dicio)

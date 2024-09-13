@@ -1,7 +1,7 @@
 import flet as ft
 from componentes.produtos.logica_produtos import *
 
-
+#Criar logica para pegar os dados da tabela e manipular - multiplicar por 2, adicioanar valor opcional e mandar para o pyautogui
 class ProdutosView:
     def __init__(self, page):
         self.page = page
@@ -15,9 +15,8 @@ class ProdutosView:
                      ],
             rows=self.colunas_produtos
         )
-        self.tipo_de_arquivo = ft.ElevatedButton(
-            'XML', on_click=self.logica_produtos.tipo_arquivo)
 
+        
     def componentes(self):
         self.tabela_gui()
         self.botoes_gui()
@@ -25,27 +24,36 @@ class ProdutosView:
     
 
     def tabela_gui(self):
-        self.coluna_com_scroll = ft.Column(
+        self.coluna_com_scroll =ft.Container(
+
+        ft.Column(
             controls=[self.tabela],
-            scroll="always",  # Ativa o scroll vertical
+            scroll="auto",  # Ativa o scroll vertical
             expand=True  # Expande a coluna para ocupar o espaço disponível
-        )
+        ),
+         height=400
+        ) 
 
 
     def botoes_gui(self):
+        valor_porcentagem = ft.TextField(label='Porcentagem', on_submit=self.logica_produtos.logica_porcentagem)
+        self.tipo_de_arquivo = ft.ElevatedButton(
+            'XML', on_click=self.logica_produtos.tipo_arquivo)
         self.botoes_colunas = ft.Column(
             controls=[
                 self.tipo_de_arquivo,
+                valor_porcentagem
             ],
             alignment=ft.MainAxisAlignment.START
         )
-
+    
     def layoutGeral(self):
         self.layout_geral = ft.Row(
         controls=[
             self.botoes_colunas,       # Botões à direita
             self.coluna_com_scroll  # Tabela à esquerda
         ],
-        vertical_alignment=ft.CrossAxisAlignment.START  # Alinha os itens ao topo da linha
+        vertical_alignment=ft.CrossAxisAlignment.START,  # Alinha os itens ao topo da linha
+        expand=True
     )
         return self.layout_geral
