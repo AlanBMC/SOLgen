@@ -2,7 +2,7 @@ from componentes.produtos.adiciona_produtos import *
 import flet as ft
 from math import ceil
 from componentes.produtos.pyautogui_cadastra_produtos import manipula_dados
-
+import asyncio
 import re
 class LogicaProdutos:
     def __init__(self, page,colunas):
@@ -10,7 +10,7 @@ class LogicaProdutos:
         self.colunas = colunas
         self.page = page
         self.porcetagem = 1
-
+        self.mensagem_status = ft.Text(value="", color="blue")
     def tipo_arquivo(self,e):
         self.data_produtos = extrai_dados_xml()
         self.atualizar_tabela()
@@ -69,6 +69,9 @@ class LogicaProdutos:
             ft.DataCell(cfop)
         ]))
         self.page.update()
+
+
+
     def cadastra_produtos(self, e):
         lista_produtos_para_cadatrastro = []
         nome = ""
@@ -103,4 +106,14 @@ class LogicaProdutos:
                     }
                     lista_produtos_para_cadatrastro.append(dicio_lista)
         manipula_dados(lista_produtos_para_cadatrastro)
+    
+    async  def atualiza_json(self, e):
+        self.mensagem_status.value = "Atualizando dados, por favor aguarde..."
+        self.page.add(self.mensagem_status)
+        self.page.update()
+        await asyncio.to_thread(atualiza_dados)
+        self.mensagem_status.value = "Dados atualizados com sucesso."
+        self.page.add(self.mensagem_status)
+
+        self.page.update()
     

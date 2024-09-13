@@ -2,21 +2,29 @@ import json
 import tkinter as tk
 from tkinter import filedialog
 import xml.etree.ElementTree as ET
+import pdfplumber
 
-def  abre_base_de_dados_json():
+def abre_base_de_dados_json():
+    data = []  # Inicializa uma lista vazia para armazenar os dados
     try:
-        with open('dados_extraidos.json', encoding='utf-8') as data_json:
+        with open('C:/Users/alanb/OneDrive/Área de Trabalho/SOLgen/SOLgen/src/json/dados_extraidos.json', encoding='utf-8') as data_json:
             data = json.load(data_json)
-
+            return data
     except FileNotFoundError:
-        data = []
-        print("Arquivo 'dados_extracao.json' não encontrado. Verifique o caminho e tente novamente.")
+        return print("Arquivo 'dados_extraidos.json' não encontrado. Verifique o caminho e tente novamente.")
 
-def adiciciona_produtos_json(dados_novos, data_json):
-    
-    with open('dados teste insercao.json', 'w', encoding='utf-8') as json_file:
-        json.dump(data_json, json_file, ensure_ascii=False, indent=4)
+    except json.JSONDecodeError:
+        return print("Erro ao decodificar o arquivo JSON. Verifique se o arquivo está no formato correto.")
+    return data
 
+
+
+def adiciciona_produtos_json(dados_novos):
+    data_atual = abre_base_de_dados_json()
+    # Adiciona o novo produto à lista existente
+    data_atual.append(dados_novos)
+    with open('C:/Users/alanb/OneDrive/Área de Trabalho/SOLgen/SOLgen/src/json/dados_extraidos2.json', 'w', encoding='utf-8') as json_file:
+        json.dump(data_atual, json_file, ensure_ascii=False, indent=4)
 
 
 
@@ -106,5 +114,80 @@ def  extrai_dados_xml():
         return data
     except ET.ParseError as e:
         print(f'O erro foi devido ao {e}')
+
+
+
+def abre_explorador_para_pdf():
+    """
+    Função para abrir o explorador de arquivos e selecionar um arquivo PDF.
+    
+    :return: O caminho do arquivo PDF selecionado ou None se nenhum arquivo for selecionado.
+    """
+    # Inicializa o Tkinter e esconde a janela principal
+    root = tk.Tk()
+    root.withdraw()  # Oculta a janela principal do tkinter
+
+    # Garante que a janela de diálogo apareça na frente
+    root.attributes('-topmost', True)
+
+    # Abre a janela de seleção de arquivos, permitindo apenas arquivos PDF
+    arquivo_pdf = filedialog.askopenfilename(
+        title='Selecione um arquivo PDF',
+        filetypes=(('Arquivos PDF', '*.pdf'), ('Todos os arquivos', '*.*'))
+    )
+
+    # Fecha a janela tkinter
+    root.destroy()
+
+    # Retorna o caminho do arquivo selecionado, ou None se nenhum arquivo for selecionado
+    if arquivo_pdf:
+        print(f'Arquivo PDF selecionado: {arquivo_pdf}')
+        return arquivo_pdf
+    else:
+        print('Nenhum arquivo selecionado.')
+        return None
+    
+
+
+def atualiza_dados():
+    dados = []
+    arquivo_pdf = abre_explorador_para_pdf()
+    with pdfplumber.open(arquivo_pdf) as pdf:
+        for page in pdf.pages:
+            tabelas = page.extract_tables()
+            for tabela in tabelas:
+                # Para cada linha da tabela, filtra elementos vazios
+                tabela_filtrada = [[item for item in linha if item] for linha in tabela]
+                
+                # Filtra as listas vazias resultantes
+                tabela_filtrada = [linha for linha in tabela_filtrada if linha]
+                if len(tabela_filtrada) <= 3:
+                    nome = tabela_filtrada[0][0][5:]
+                    codigo =  tabela_filtrada[1][0] # Exemplo de uso
+                    preco = tabela_filtrada[2][0]
+                                    
+                    item = {
+                        "nome": nome,
+                        "codigo": codigo,
+                        "preco": preco
+                    }
+                    dados.append(item)
+                elif len(tabela_filtrada) >3:
+                    nome = tabela_filtrada[0][0][5:] + tabela_filtrada[1][0]
+                    codigo =  tabela_filtrada[2][0] # Exemplo de uso
+                    preco = tabela_filtrada[3][0]
+                    item = {
+                        "nome": nome,
+                        "codigo": codigo,
+                        "preco": preco
+                    }
+                    dados.append(item)
+# Exemplo de uso
+
+                           
+    with open('C:/Users/alanb/OneDrive/Área de Trabalho/SOLgen/SOLgen/src/json/dados_extraidos2.json', 'w', encoding='utf-8') as json_file:
+        json.dump(dados, json_file, ensure_ascii=False, indent=4)
+
+    # Exibe os dados salvos para confirmação
 
 

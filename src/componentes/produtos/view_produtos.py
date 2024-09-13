@@ -46,6 +46,7 @@ class ProdutosView:
 
 
     def botoes_gui(self):
+        botao_atualiza_banco = ft.ElevatedButton('Atualiza json', on_click=self.logica_produtos.atualiza_json)
         valor_porcentagem = ft.TextField(label='Porcentagem', on_submit=self.logica_produtos.logica_porcentagem)
         cadastrar_produtos = ft.ElevatedButton('Cadastrar produtos', on_click=self.logica_produtos.cadastra_produtos)
         adiciona_produto_vazio = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=self.logica_produtos.adiciona_produtos_vazio)
@@ -56,7 +57,8 @@ class ProdutosView:
                 self.tipo_de_arquivo,
                 valor_porcentagem,
                 cadastrar_produtos,
-                adiciona_produto_vazio
+                adiciona_produto_vazio,
+                botao_atualiza_banco
 
                 
             ],
