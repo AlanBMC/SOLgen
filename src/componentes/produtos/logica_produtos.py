@@ -54,8 +54,8 @@ class LogicaProdutos:
         """
         nome = ft.TextField(value="", color='#191810', bgcolor='#e4e4ac',keyboard_type='nome')
         codigo = ft.TextField(value="", color='#191810',bgcolor='#e4e4ac', keyboard_type='codigo')
-        cfop = ft.TextField(value="", color='#191810',bgcolor='#e4e4ac', width=400, keyboard_type='cfop')
-        ncm = ft.TextField(value="", color='#191810',width=250,bgcolor='#e4e4ac', keyboard_type='ncm')
+        cfop = ft.TextField(value="", color='#191810',bgcolor='#e4e4ac',  keyboard_type='cfop')
+        ncm = ft.TextField(value="", color='#191810',bgcolor='#e4e4ac', keyboard_type='ncm')
         preco_unitario = ft.TextField(value="", color='#191810', bgcolor='#e4e4ac',keyboard_type='precoUN')
         preco_revenda = ft.TextField(value="", color='#191810', bgcolor='#e4e4ac',keyboard_type='preco_revenda')
 

@@ -8,16 +8,20 @@ class ProdutosView:
         self.colunas_produtos = []
         self.logica_produtos = LogicaProdutos(self.page,self.colunas_produtos)
         self.tabela = ft.DataTable(
-            width=800,
+            width=940,
             bgcolor='#f0e162',
             heading_row_height=100,
+            border=ft.border.all(2, "#8a8a86"),
+            border_radius=10,
+            vertical_lines=ft.BorderSide(3, "#717171"),
+            horizontal_lines=ft.BorderSide(1, "#717171"),
             data_row_color='#d6d66e',
-            columns=[ft.DataColumn(ft.Text('Nome do produto', color='#191810')),
-                      ft.DataColumn(ft.Text('Codigo de barras', color='#191810')),
-                        ft.DataColumn(ft.Text('preco unitario', color='#191810')),
-                          ft.DataColumn(ft.Text('Preco de revenda', color='#191810')),
-                          ft.DataColumn(ft.Text('NCM', color='#191810')),
-                          ft.DataColumn(ft.Text('CFOP', color='#191810')),
+            columns=[ft.DataColumn(ft.Text('Nome do produto', color='#191810',width=100)),
+                      ft.DataColumn(ft.Text('Codigo de barras', color='#191810',width=100)),
+                        ft.DataColumn(ft.Text('preco unitario', color='#191810',width=100)),
+                          ft.DataColumn(ft.Text('Preco de revenda', color='#191810',width=100)),
+                          ft.DataColumn(ft.Text('NCM', color='#191810',width=100)),
+                          ft.DataColumn(ft.Text('CFOP', color='#191810',width=100)),
                      ],
             rows=self.colunas_produtos
         )
