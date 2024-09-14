@@ -79,3 +79,13 @@ Contribuições são sempre bem-vindas! Se você quiser contribuir com o projeto
 **Adendo para a Versão 3.0.0**: 
 Estamos planejando uma atualização significativa com novas funcionalidades e melhorias na usabilidade, na eficiência da automação e integração de APIs. Fique atento para as novidades!
 
+## Sobre o autor
+
+
+|  |  |
+|:-------------:|:------------------------------------------------------------:|
+|  <img src="alan.jpeg" width="150px"></br> **Alan Bruno Morais Costa** | 
+Me chamo Alan, sou estudante de Ciências da Computação na Universidade Federal de Mato Grosso (UFMT). Este repositório contém o projeto prático para o teste da Nuti. A Nuti é um projeto prático que funciona como consultor de contratos públicos, realizando consultas de contratos por intervalo de datas e CNPJ, além de otimizar a organização e busca por contratantes.  |
+
+- **Email:** alanbrunomoraescosta18@hotmail.com
+- **LinkedIn:** [Alan  LinkedIn](https://www.linkedin.com/in/alan-morais-4861322b0)
