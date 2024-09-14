@@ -1,6 +1,8 @@
 from flet import *
 from componentes.impressora.view_impressora import ImpressoraView
 from componentes.produtos.view_produtos import ProdutosView
+
+
 class Navegador:
     def __init__(self,page:Page):
         self.page = page
@@ -20,9 +22,11 @@ class Navegador:
         if e.control.selected_index == 0:
             pass
         elif e.control.selected_index == 1:
-            print( e.control.selected_index )
             page_impressora = ImpressoraView(self.page)
             self.page.add(page_impressora.componentes())
         elif e.control.selected_index == 2:
             page_produtos = ProdutosView(self.page)
             self.page.add(page_produtos.componentes())
+        
+        self.page.add(self.navbar)
+        self.page.update()

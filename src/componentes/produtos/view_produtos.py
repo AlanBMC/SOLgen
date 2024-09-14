@@ -1,6 +1,5 @@
 import flet as ft
 from componentes.produtos.logica_produtos import *
-
 #Criar logica para pegar os dados da tabela e manipular - multiplicar por 2, adicioanar valor opcional e mandar para o pyautogui
 class ProdutosView:
     def __init__(self, page):
@@ -30,6 +29,7 @@ class ProdutosView:
     def componentes(self):
         self.tabela_gui()
         self.botoes_gui()
+       
         return self.layoutGeral()
     
 
@@ -69,8 +69,8 @@ class ProdutosView:
         self.layout_geral = ft.Row(
         controls=[
             self.botoes_colunas,       # Botões à direita
-            self.coluna_com_scroll  # Tabela à esquerda
-        ],
+            self.coluna_com_scroll
+                            ],
         vertical_alignment=ft.CrossAxisAlignment.START,  # Alinha os itens ao topo da linha
         expand=True
     )
