@@ -1,0 +1,1 @@
+#classe para mostrar status dos produtos, fora do escopo do projeto
