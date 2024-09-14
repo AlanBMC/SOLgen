@@ -73,39 +73,49 @@ class LogicaProdutos:
 
 
     def cadastra_produtos(self, e):
-        lista_produtos_para_cadatrastro = []
-        nome = ""
-        preco = ""
-        codigo_de_barras = ""
-        cfop = ""
-        ncm = ""
-        precoUN = ''
-    
+        lista_produtos_para_cadastro = []  # Inicializa a lista que armazenará os produtos
+
+        # Loop pelas linhas da tabela
         for linha in self.colunas:
+            nome = ""
+            preco = ""
+            codigo_de_barras = ""
+            cfop = ""
+            ncm = ""
+            precoUN = ""
+
+            # Loop pelas células da linha
             for celula in linha.cells:
                 if isinstance(celula.content, ft.TextField):
                     if celula.content.keyboard_type == 'nome':
-                        nome =celula.content.value
+                        nome = celula.content.value
                     elif celula.content.keyboard_type == 'preco_revenda':
-                        preco =celula.content.value
+                        preco = celula.content.value
                     elif celula.content.keyboard_type == 'codigo':
-                        codigo_de_barras= celula.content.value
+                        codigo_de_barras = celula.content.value
                     elif celula.content.keyboard_type == 'cfop':
                         cfop = celula.content.value
                     elif celula.content.keyboard_type == 'ncm':
-                        ncm = celula.content.value
+                        if celula.content.value:
+                            ncm = celula.content.value
                     elif celula.content.keyboard_type == 'precoUN':
-                        precoUN = celula.content.value
-                    dicio_lista = {
-                        'nome':nome,
-                        'codigo_de_barras':codigo_de_barras,
-                        'cfop':cfop,
-                        'ncm':ncm,
-                        'preco':preco,
-                        'precoUN': precoUN
-                    }
-                    lista_produtos_para_cadatrastro.append(dicio_lista)
-        manipula_dados(lista_produtos_para_cadatrastro)
+                        if celula.content.value:
+                            precoUN = celula.content.value
+
+            # Só adiciona o produto se tiver algum valor
+            if nome or preco or codigo_de_barras or cfop or ncm or precoUN:
+                dicio_lista = {
+                    'nome': nome,
+                    'codigo_de_barras': codigo_de_barras,
+                    'cfop': cfop,
+                    'ncm': ncm,
+                    'preco': preco,
+                    'precoUN': precoUN
+                }
+                lista_produtos_para_cadastro.append(dicio_lista)
+
+        # Chama a função que manipula os dados
+        manipula_dados(lista_produtos_para_cadastro)
     
     async  def atualiza_json(self, e):
         self.mensagem_status.value = "Atualizando dados, por favor aguarde..."
