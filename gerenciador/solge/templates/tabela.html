@@ -5,21 +5,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabela Editável</title>
+    <title>Produtos</title>
     <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
 </head>
 <body>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+   
+    <!-- Menu Lateral -->
+    <nav class="sidebar" id="sidebar">
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+            <li><a href="#">Extrair XML</a></li>
+            <li><a href="#">Atualizar banco</a></li>
+        </ul>
+    </nav>
 
     <div class="container">
-        <h2>Tabela Editável</h2>
+        <h2>Produtos</h2>
 
         <!-- Tabela Editável -->
         <table id="editableTable">
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
+                    <th>Codigo de barras</th>
+                    <th>Preço</th>
                     <th>Ação</th>
                 </tr>
             </thead>

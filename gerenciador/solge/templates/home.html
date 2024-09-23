@@ -16,7 +16,7 @@
     <nav class="sidebar" id="sidebar">
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Sobre</a></li>
+            <li><a href="{% url 'cadastro_produto' %}">Cadastro</a></li>
             <li><a href="#">Contato</a></li>
         </ul>
     </nav>
@@ -39,10 +39,10 @@
                     <p>Descrição do Card 2.</p>
                 </div>
             </a>
-            <a href="#" class="card">
+            <a href="{% url 'cadastro_produto' %}" class="card">
                 <div class="card-content">
-                    <h3>Card 3</h3>
-                    <p>Descrição do Card 3.</p>
+                    <h3>Cadastro</h3>
+                    <p>Extrai dados do XML e PDF</p>
                 </div>
             </a>
         </section>

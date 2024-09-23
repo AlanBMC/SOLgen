@@ -22,6 +22,70 @@ h2 {
     font-size: 2rem;
     color: #333;
 }
+.menu-toggle {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    border-radius: 10px;
+}
+
+.menu-toggle:focus {
+    outline: none;
+}
+
+/* Menu Lateral */
+.sidebar {
+    width: 150px;
+    height: 100%;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    border-radius:5px;
+    left: -250px; /* Escondido fora da tela */
+    transition: 0.3s ease;
+    padding-top: 60px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.645);  /* Sombra mais forte no hover */
+
+}
+
+.sidebar.active {
+    left: 0; /* Mostra o menu */
+}
+
+.sidebar .nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .nav-links li {
+    margin-top: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.sidebar .nav-links a {
+    color: #fff;
+    padding: 10px 10px;
+    display: block;
+    text-align: center;
+    font-size: 1.1rem;
+    background-color: #444;
+    border-radius: 10px;  /* Borda arredondada */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);  /* Sombra */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito de hover nos botões do menu */
+.sidebar .nav-links a:hover {
+    background-color: #555;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);  /* Sombra mais forte no hover */
+}
 
 /* Estilo da tabela */
 table {

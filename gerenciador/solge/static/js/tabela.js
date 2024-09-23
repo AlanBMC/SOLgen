@@ -15,3 +15,7 @@ function deleteRow(button) {
     const row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);
 }
+function toggleMenu() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('active');
+}
