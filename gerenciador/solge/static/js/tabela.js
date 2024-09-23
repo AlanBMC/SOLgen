@@ -4,8 +4,8 @@ function addRow() {
 
     newRow.innerHTML = `
         <td contenteditable="true">Novo Nome</td>
-        <td contenteditable="true">email@email.com</td>
-        <td contenteditable="true">(XX) XXXX-XXXX</td>
+        <td contenteditable="true">000000000</td>
+        <td contenteditable="true">XXXXXXXX</td>
         <td><button class="delete-btn" onclick="deleteRow(this)">Excluir</button></td>
     `;
 }
@@ -19,3 +19,26 @@ function toggleMenu() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('active');
 }
+
+        // Abre o modal
+        var modal = document.getElementById("myModal");
+        var openModalBtn = document.getElementById("openModalBtn");
+        var closeBtn = document.getElementsByClassName("close")[0];
+
+        // Quando o usuário clicar no link, abre o modal
+        openModalBtn.onclick = function(event) {
+            event.preventDefault(); // Impede o comportamento padrão do link
+            modal.style.display = "block";
+        }
+
+        // Fecha o modal quando o usuário clicar no X
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Fecha o modal se o usuário clicar fora dele
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }

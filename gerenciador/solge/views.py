@@ -3,6 +3,8 @@ import pdfplumber
 import tkinter as tk
 from tkinter import filedialog
 import xml.etree.ElementTree as ET
+import time
+import pyperclip
 
 # Create your views here.
 def home(request):
@@ -34,7 +36,14 @@ def cadastro_produto(request):
     salva no banco e manda para funcao do pyautogui
 
     """
-    return render(request, 'tabela.html')
+    data = []
+    if request.method == 'POST':
+        arquivo = request.FILES.get('arquivo')
+        data = extrai_dados_xml(arquivo)
+        
+        return render(request, 'tabela.html', {'produtos': data})
+    else:
+        return render(request, 'tabela.html')
 
 
 def extrai_dados(arquivo_pdf):
@@ -71,19 +80,6 @@ def extrai_dados(arquivo_pdf):
                     }
                     dados.append(item)
 
-def abre_explorador_de_arquivo_apenas_xml():
-    root = tk.Tk()
-    root.withdraw()
-    root.attributes('-topmost', True)
-    arquivo_selecionado = filedialog.askopenfilename(
-        title='Selecioine o arquivo XML',
-        filetypes=(('Arquivo XML', '*.xml'), ('Todos os arquivos', '*.*'))
-    )
-    if arquivo_selecionado:
-        print(f'arquivo selecionado: {arquivo_selecionado}')
-        return arquivo_selecionado
-    else:
-        print('Nenhum arquivo selecionado')
 
 def tratamento_de_quantidade_valor_un(vProd, qCom):
     """
@@ -95,8 +91,9 @@ def tratamento_de_quantidade_valor_un(vProd, qCom):
     return valor_unitario
 
 
-def  extrai_dados_xml():
-    arquivo_xml = abre_explorador_de_arquivo_apenas_xml()
+
+
+def  extrai_dados_xml(arquivo_xml):
     data = []
     try:
         tree = ET.parse(arquivo_xml)  # Carrega a árvore XML
@@ -157,3 +154,65 @@ def  extrai_dados_xml():
         return data
     except ET.ParseError as e:
         print(f'O erro foi devido ao {e}')
+
+
+
+def enter_text(text):
+    pyperclip.copy(text)
+    pyautogui.hotkey('ctrl', 'v')
+    time.sleep(0.1)
+
+def digita_texto(texto):
+    pyautogui.write(texto, interval=0.1)
+    
+def click_ok():
+    time.sleep(1)
+    pyautogui.click(x=1154, y=562)
+
+def pyautogui(item_nome, item_codigo, item_ncm, item_preco_revenda):
+    # Novo item
+    time.sleep(2)
+    pyautogui.click(x=1239, y=185)
+    time.sleep(1)
+    # Clica em OK
+    click_ok()
+
+    # Nome do item
+    pyautogui.click(x=715, y=280)
+    enter_text(item_nome)
+    time.sleep(0.5)
+
+    # Clica na janela de fiscal
+    pyautogui.click(x=612, y=307)
+    time.sleep(1)
+
+    # Clica no input de NCM
+    pyautogui.click(x=729, y=353)
+    digita_texto(item_ncm)
+    time.sleep(1)
+    
+
+    
+    # Volta para geral
+    pyautogui.click(x=416, y=306)
+    time.sleep(1)
+
+    # Coloca o código
+    pyautogui.click(x=590, y=334)
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.press('backspace')
+    enter_text(item_codigo)
+    time.sleep(1)
+
+    # Coloca preço de revenda
+    pyautogui.click(x=577, y=592)
+    enter_text(item_preco_revenda)
+    time.sleep(1)
+
+    # Salva item
+    pyautogui.click(x=1460, y=187)
+    time.sleep(1)
+
+    # Aperta ok após salvar
+    click_ok()
+    time.sleep(2)  
