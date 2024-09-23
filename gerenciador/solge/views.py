@@ -1,5 +1,9 @@
 from django.shortcuts import render # type: ignore
 import pdfplumber
+import tkinter as tk
+from tkinter import filedialog
+import xml.etree.ElementTree as ET
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -34,6 +38,7 @@ def cadastro_produto(request):
 
 
 def extrai_dados(arquivo_pdf):
+
     dados = []
     with pdfplumber.open(arquivo_pdf) as pdf:
         for page in pdf.pages:
@@ -65,3 +70,17 @@ def extrai_dados(arquivo_pdf):
                         "preco": preco
                     }
                     dados.append(item)
+
+def abre_explorador_de_arquivo_apenas_xml():
+    root = tk.Tk()
+    root.withdraw()
+    root.attributes('-topmost', True)
+    arquivo_selecionado = filedialog.askopenfilename(
+        title='Selecioine o arquivo XML',
+        filetypes=(('Arquivo XML', '*.xml'), ('Todos os arquivos', '*.*'))
+    )
+    if arquivo_selecionado:
+        print(f'arquivo selecionado: {arquivo_selecionado}')
+        return arquivo_selecionado
+    else:
+        print('Nenhum arquivo selecionado')
