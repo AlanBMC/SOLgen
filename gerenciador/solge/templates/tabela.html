@@ -24,7 +24,7 @@
     <div id="myModal" class="modal"></div>
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Cadastro de Produto</h2>
+            <h2>Extrair dados do xml</h2>
 
             <!-- Formulário no Modal -->
             <form action="{% url 'cadastro_produto' %}" method="POST" enctype="multipart/form-data">
@@ -32,7 +32,7 @@
                 <label for="arquivo">Arquivo XML:</label>
                 <input type="file" name="arquivo" id="arquivo" accept=".xml" required>
                 
-                <button type="submit">Cadastrar Produto</button>
+                <button type="submit">Visualizar produtos</button>
             </form>
         </div>
     </div>
@@ -41,7 +41,7 @@
 
         <!-- Tabela Editável -->
         <table id="editableTable">
-            <form action="">
+            <form action="{% url 'cadastra_produto_pyautogui' %}" method="POST"> {% csrf_token %}
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -54,18 +54,24 @@
 
                     {%for produto in produtos %}
                     <tr>
-                        <td contenteditable="true">{{produto.nome}}</td>
-                        <td contenteditable="true">{{produto.codigo_de_barras}}</td>
-                        <td contenteditable="true">{{produto.valor_revenda}}</td>
-                        <td><button class="delete-btn" onclick="deleteRow(this)">Excluir</button></td>
+                        <td contenteditable="true" class="editable nome">{{ produto.nome }}</td>
+                        <td contenteditable="true" class="editable codigo">{{ produto.codigo_de_barras }}</td>
+                        <td contenteditable="true" class="editable preco">{{ produto.valor_revenda }}</td>
+                        
+                        <!-- Inputs ocultos para sincronizar com os valores editados -->
+                        <input type="hidden" name="nome_{{forloop.counter}}" value="{{ produto.nome }}">
+                        <input type="hidden" name="codigo_{{forloop.counter}}" value="{{ produto.codigo_de_barras }}">
+                        <input type="hidden" name="preco_{{forloop.counter}}" value="{{ produto.valor_revenda }}">
+                        
+                        <td><button type="button" class="delete-btn" onclick="deleteRow(this)">Excluir</button></td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            
+           
             <!-- Botão de Adicionar Linha -->
             <button class="add-btn" onclick="addRow()">Adicionar Linha</button>
-            <button class="add-btn" >Cadastrar</button>
+            <button class="add-btn" type="submit">Cadastrar</button>
         </form>
         </div>
 

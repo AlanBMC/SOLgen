@@ -42,3 +42,21 @@ function toggleMenu() {
                 modal.style.display = "none";
             }
         }
+
+
+        document.getElementById('produtosForm').onsubmit = function() {
+            const rows = document.querySelectorAll('tr');
+            rows.forEach((row, index) => {
+                const nome = row.querySelector('.nome').innerText;
+                const codigo = row.querySelector('.codigo').innerText;
+                const preco = row.querySelector('.preco').innerText;
+        
+                // Sincronizando os inputs ocultos com os novos valores editados
+                if (row.querySelector(`input[name="nome_${index}"]`)) {
+                    row.querySelector(`input[name="nome_${index}"]`).value = nome;
+                    row.querySelector(`input[name="codigo_${index}"]`).value = codigo;
+                    row.querySelector(`input[name="preco_${index}"]`).value = preco;
+                }
+            });
+        };
+        

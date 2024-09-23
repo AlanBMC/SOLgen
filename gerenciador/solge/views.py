@@ -1,11 +1,10 @@
-from django.shortcuts import render # type: ignore
+from django.shortcuts import render, redirect
 import pdfplumber
 import tkinter as tk
 from tkinter import filedialog
 import xml.etree.ElementTree as ET
 import time
 import pyperclip
-
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -31,17 +30,41 @@ def impressora():
 
 def cadastro_produto(request):
     """
-    pega xml, pdf
-    extrai dados
-    salva no banco e manda para funcao do pyautogui
-
+    Recebe um arquivo XML ou PDF, extrai dados do XML, salva os dados no banco,
+    envia os dados para uma função que interage com o PyAutoGUI, e cria uma
+    sessão com os produtos.
     """
-    data = []
     if request.method == 'POST':
         arquivo = request.FILES.get('arquivo')
         data = extrai_dados_xml(arquivo)
+        data_sessao = request.session.get('produtos', [])
+
+        if not data_sessao:
+            request.session['produtos'] = data
+            data_sessao = data
+
+        return render(request, 'tabela.html', {'produtos': data_sessao})
+    else:
+        return render(request, 'tabela.html')
+
+def atualiza_dados_da_sessao(request):
+    pass
+
+def cadastra_produto_pyautogui(request):
+    if request.method == 'POST':
+        data = request.session.get('produtos', [])
+        if data:
+            print(data)  # Para fins de debug
+            for produto in data:
+                try:
+                    pyautogui2(produto['nome'], produto['codigo_de_barras'], produto['ncm'], produto['valor_revenda'])
+                except Exception as e:
+                    print(f"Erro ao processar produto {produto['nome']}: {e}")
+
+            # Limpar a sessão após o processamento
+            request.session.pop('produtos', None)
         
-        return render(request, 'tabela.html', {'produtos': data})
+        return redirect('cadastro_produto')
     else:
         return render(request, 'tabela.html')
 
@@ -89,9 +112,6 @@ def tratamento_de_quantidade_valor_un(vProd, qCom):
     valor_unitario = vProd/ (qCom*12)
 
     return valor_unitario
-
-
-
 
 def  extrai_dados_xml(arquivo_xml):
     data = []
@@ -155,8 +175,6 @@ def  extrai_dados_xml(arquivo_xml):
     except ET.ParseError as e:
         print(f'O erro foi devido ao {e}')
 
-
-
 def enter_text(text):
     pyperclip.copy(text)
     pyautogui.hotkey('ctrl', 'v')
@@ -169,6 +187,8 @@ def click_ok():
     time.sleep(1)
     pyautogui.click(x=1154, y=562)
 
+def pyautogui2(item_nome, item_codigo, item_ncm, item_preco_revenda):
+    print('cadastrando')
 def pyautogui(item_nome, item_codigo, item_ncm, item_preco_revenda):
     # Novo item
     time.sleep(2)
