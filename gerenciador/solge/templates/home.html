@@ -1,0 +1,54 @@
+{%load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Responsivo com Menu Lateral</title>
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+</head>
+<body>
+    <!-- Botão de Abrir o Menu Lateral -->
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+
+    <!-- Menu Lateral -->
+    <nav class="sidebar" id="sidebar">
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <!-- Navbar -->
+
+        <!-- Container dos Cards -->
+        <section class="cards-container">
+            <a href="#" class="card">
+                <div class="card-content">
+                    <h3>Card 1</h3>
+                    <p>Descrição do Card 1.</p>
+                </div>
+            </a>
+            <a href="#" class="card">
+                <div class="card-content">
+                    <h3>Card 2</h3>
+                    <p>Descrição do Card 2.</p>
+                </div>
+            </a>
+            <a href="#" class="card">
+                <div class="card-content">
+                    <h3>Card 3</h3>
+                    <p>Descrição do Card 3.</p>
+                </div>
+            </a>
+        </section>
+    </div>
+
+    <!-- Script para controle do menu -->
+</body>
+    <script src="{%static 'js/home.js' %}"></script>
+</html>

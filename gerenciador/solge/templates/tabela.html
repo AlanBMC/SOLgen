@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela Editável</title>
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Tabela Editável</h2>
+
+        <!-- Tabela Editável -->
+        <table id="editableTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td contenteditable="true">John Doe</td>
+                    <td contenteditable="true">johndoe@email.com</td>
+                    <td contenteditable="true">(11) 1234-5678</td>
+                    <td><button class="delete-btn" onclick="deleteRow(this)">Excluir</button></td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Jane Doe</td>
+                    <td contenteditable="true">janedoe@email.com</td>
+                    <td contenteditable="true">(11) 8765-4321</td>
+                    <td><button class="delete-btn" onclick="deleteRow(this)">Excluir</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Botão de Adicionar Linha -->
+        <button class="add-btn" onclick="addRow()">Adicionar Linha</button>
+    </div>
+
+    <!-- Script para adicionar e remover linhas -->
+   
+</body>
+<script src="{%static 'js/tabela.js' %}"></script>
+</html>
