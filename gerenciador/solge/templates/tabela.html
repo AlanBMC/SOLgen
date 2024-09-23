@@ -41,7 +41,6 @@
 
         <!-- Tabela Editável -->
         <table id="editableTable">
-            <form action="{% url 'cadastra_produto_pyautogui' %}" method="POST"> {% csrf_token %}
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -58,22 +57,19 @@
                         <td contenteditable="true" class="editable codigo">{{ produto.codigo_de_barras }}</td>
                         <td contenteditable="true" class="editable preco">{{ produto.valor_revenda }}</td>
                         
-                        <!-- Inputs ocultos para sincronizar com os valores editados -->
-                        <input type="hidden" name="nome_{{forloop.counter}}" value="{{ produto.nome }}">
-                        <input type="hidden" name="codigo_{{forloop.counter}}" value="{{ produto.codigo_de_barras }}">
-                        <input type="hidden" name="preco_{{forloop.counter}}" value="{{ produto.valor_revenda }}">
-                        
+             
                         <td><button type="button" class="delete-btn" onclick="deleteRow(this)">Excluir</button></td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-           
-            <!-- Botão de Adicionar Linha -->
             <button class="add-btn" onclick="addRow()">Adicionar Linha</button>
-            <button class="add-btn" type="submit">Cadastrar</button>
+            
+            <!-- Botão de Adicionar Linha -->
+            <form  action="" method="POST"> {% csrf_token %}
+                <button class="add-btn" type="submit">Cadastrar</button>
+            </div>
         </form>
-        </div>
 
     <!-- Script para adicionar e remover linhas -->
    
