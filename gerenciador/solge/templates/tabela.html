@@ -27,7 +27,7 @@
             <h2>Extrair dados do xml</h2>
 
             <!-- Formulário no Modal -->
-            <form action="{% url 'cadastro_produto' %}" method="POST" enctype="multipart/form-data">
+            <form action="{% url 'criasessao' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <label for="arquivo">Arquivo XML:</label>
                 <input type="file" name="arquivo" id="arquivo" accept=".xml" required>
@@ -52,7 +52,7 @@
             <tbody>
 
                     {%for produto in produtos %}
-                    <tr>
+                    <tr data-id="{{ produto.codigo_de_barras }}">
                         <td contenteditable="true" class="editable nome">{{ produto.nome }}</td>
                         <td contenteditable="true" class="editable codigo">{{ produto.codigo_de_barras }}</td>
                         <td contenteditable="true" class="editable preco">{{ produto.valor_revenda }}</td>

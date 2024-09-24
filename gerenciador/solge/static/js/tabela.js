@@ -45,3 +45,53 @@ function toggleMenu() {
 
 
 
+
+function sendUpdate(produtoData) {
+    fetch("/atualiza_produtos/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie('csrftoken')
+        },
+        body: JSON.stringify(produtoData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Sessão atualizada:', data);
+    })
+    .catch(error => {
+        console.error('Erro ao atualizar:', error);
+    });
+}
+
+// Adiciona listener para detectar edições nas células da tabela
+document.querySelectorAll('.editable').forEach(cell => {
+    cell.addEventListener('blur', function() {
+        // Quando o usuário terminar de editar a célula, pegue os dados
+        const row = this.closest('tr');
+        const produtoData = {
+            codigo_de_barras: row.querySelector('.codigo').textContent,
+            nome: row.querySelector('.nome').textContent,
+            valor_revenda: row.querySelector('.preco').textContent
+        };
+
+        // Envie os dados via AJAX para atualizar a sessão
+        sendUpdate(produtoData);
+    });
+});
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Verifica se esse cookie começa com o nome fornecido
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
