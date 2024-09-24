@@ -6,5 +6,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('criasessao/', views.cria_sessao_produtos, name='criasessao'),
     path('atualiza_produtos/', views.atualiza_produtos, name='atualiza_produtos'),
+    path('automacao_de_cadastro/', views.envia_pro_pyautogui, name='automacao_de_cadastro'),
     
 ]

@@ -12,14 +12,13 @@ def home(request):
     return render(request, 'home.html')
 
 def cria_sessao_produtos(request):
+    data_sessao = request.session.get('produtos', [])
     if request.method == 'POST':
         arquivo = request.FILES.get('arquivo')
-        data_sessao = request.session.get('produtos', [])
         data = extrai_dados_xml(arquivo)
         request.session['produtos'] = data
         if not data_sessao:
             data_sessao = data
-            print(data_sessao)  # Segundo print
         return render(request, 'tabela.html', {'produtos': data_sessao})
     else:
         return render(request, 'tabela.html', {'produtos': data_sessao})
@@ -124,3 +123,8 @@ def tratamento_de_quantidade_valor_un(vProd, qCom):
 
 
 
+def envia_pro_pyautogui(request):
+
+    produtos = request.session.get('produtos', [])
+    print(produtos)
+    return redirect('criasessao')
