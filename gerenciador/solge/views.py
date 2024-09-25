@@ -181,3 +181,21 @@ def atualiza_banco(arquivo_pdf):
                     
                     dados.append(item)
     return dados
+
+
+def impressora(request):
+
+
+    return render(request, 'impressora.html')
+
+def adiciona_card(request):
+    if request.method == 'POST':
+        body =  json.loads(request.body)
+        codigo_do_produto = body.get('codigo')
+        print(codigo_do_produto)
+        try:
+            produto = Produto.objects.get(codigo_de_barras=codigo_do_produto)
+            return JsonResponse({'nome': produto.nome, 'preco': produto.preco, 'codigo': produto.codigo_de_barras}) 
+        except Produto.DoesNotExist:
+            return JsonResponse({'Status': 'Produto nao existe'}, status=404)
+    return JsonResponse({'erro': 'metodo incorreto'},status=405 )

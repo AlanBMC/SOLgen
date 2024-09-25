@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressora</title>
+    <link rel="stylesheet" href="{% static 'css/impressora.css'%}">
+
+</head>
+
+<body>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+   
+    <!-- Menu Lateral -->
+    <nav class="sidebar" id="sidebar">
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{%url 'atualiza_banco' %}" >Atualizar banco</a></li>
+            <li><a href="{%url 'impressora' %}" >Impressora</a></li>
+            <li><a href="#">Sobre</a></li>
+        </ul>
+    </nav>
+    <section class="main">
+        <h1>Inserir Código de Produto</h1>
+        <input type="text" id="productCodeInput" placeholder="Digite o código do produto e pressione Enter">
+    </section>
+    <section class="cards-container" id="cardsContainer">
+        
+    </section>
+</body>
+<script src="{%static 'js/impressora.js' %}"></script>
+
+</html>
