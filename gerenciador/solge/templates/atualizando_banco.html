@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualiza banco</title>
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+   
+    <!-- Menu Lateral -->
+    <nav class="sidebar" id="sidebar">
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+            <li><a href="#" id="openModalBtn">Extrai  arquivo</a></li>
+            
+                <li><a href="{%url 'atualiza_banco' %}" >Atualizar banco</a></li>
+                
+        </ul>
+    </nav>
+        
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Extrair dados do xml</h2>
+
+        <!-- Formulário no Modal -->
+        <form action="{% url 'atualiza_banco' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="arquivo">Arquivo PDF DE ETIQUETAS:</label>
+            <input type="file" name="arquivo" id="arquivo" accept=".pdf" required>
+            
+            <button type="submit">Atualizar</button>
+        </form>
+    </div>
+</body>
+<script src="{%static 'js/tabela.js' %}"></script>
+
+</html>

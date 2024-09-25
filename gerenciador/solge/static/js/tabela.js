@@ -95,3 +95,8 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+function clicando(){
+    setTimeout(function() {
+        document.getElementById('arquivo').click();
+    }, 1000);
+}

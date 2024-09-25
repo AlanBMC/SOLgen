@@ -18,10 +18,12 @@
             <li><a href="#">Sobre</a></li>
             <li><a href="#">Contato</a></li>
             <li><a href="#" id="openModalBtn">Extrai  arquivo</a></li>
-            <li><a href="#">Atualizar banco</a></li>
+            
+                <li><a href="{%url 'atualiza_banco' %}" >Atualizar banco</a></li>
+                
         </ul>
     </nav>
-    <div id="myModal" class="modal"></div>
+    
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Extrair dados do xml</h2>
@@ -35,7 +37,7 @@
                 <button type="submit">Visualizar produtos</button>
             </form>
         </div>
-    </div>
+       
     <div class="container">
         <h2>Produtos</h2>
 
