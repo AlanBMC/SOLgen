@@ -6,6 +6,7 @@ import xml.etree.ElementTree as ET
 import time
 import pyperclip
 import json
+from .models import Produto
 from django.http import JsonResponse
 # Create your views here.
 def home(request):
@@ -133,8 +134,14 @@ def atualiza_banco_view(request):
     if request.method == 'POST':
         arquivo  = request.FILES.get('arquivo')
         dados = atualiza_banco(arquivo)
+        if Produto.objects.exists():
+            Produto.objects.all().delete()
+
         for valores in dados:
-            print(valores['nome'], valores['codigo'], valores['preco'])
+            Produto.objects.create(nome = valores['nome'],
+                                   preco = valores['preco'],
+                                   codigo = valores['codigo'])
+            
         return render(request,'atualizando_banco.html')
     else:
         return render(request, 'atualizando_banco.html')
