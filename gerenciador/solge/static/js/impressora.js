@@ -16,19 +16,20 @@ document.getElementById("productCodeInput").addEventListener("keydown", function
         }
     }
 });
-function addcardproduto(codigoproduto){
-    console.log('codigo aqui', codigoproduto)
-    fetch("/adicionacard/",{
+function addcardproduto(codigoproduto) {
+    console.log('codigo aqui', codigoproduto);
+    fetch("/adicionacard/", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
             "X-CSRFToken": getCookie('csrftoken')
-            },
-            body: JSON.stringify({"codigo": codigoproduto})
+        },
+        body: JSON.stringify({ "codigo": codigoproduto })
     })
     .then(response => response.json())
     .then(data => {
         console.log('Sessão atualizada:', data);
+       
     })
     .catch(error => {
         console.error('Erro ao atualizar:', error);
@@ -49,4 +50,20 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function addCardToPage(nome, preco, codigo) {
+    // Cria o elemento do card
+    const card = document.createElement('div');
+    card.classList.add('produto-card');
+
+    // Adiciona o conteúdo do card
+    card.innerHTML = `
+        <h3>${nome}</h3>
+        <p>Preço: R$ ${preco.toFixed(2)}</p>
+        <p>Código: ${codigo}</p>
+    `;
+
+    // Adiciona o card à página (supondo que exista uma div com id "cards-container")
+    document.getElementById('cards-container').appendChild(card);
 }

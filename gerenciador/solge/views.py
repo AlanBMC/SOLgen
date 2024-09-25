@@ -191,11 +191,13 @@ def impressora(request):
 def adiciona_card(request):
     if request.method == 'POST':
         body =  json.loads(request.body)
+        print('corpo ',body)
         codigo_do_produto = body.get('codigo')
-        print(codigo_do_produto)
+        print('codigo do produto: ',codigo_do_produto)
         try:
             produto = Produto.objects.get(codigo_de_barras=codigo_do_produto)
-            return JsonResponse({'nome': produto.nome, 'preco': produto.preco, 'codigo': produto.codigo_de_barras}) 
+            print(produto.nome, produto.preco)
+            return JsonResponse({'nome': produto.nome}) 
         except Produto.DoesNotExist:
             return JsonResponse({'Status': 'Produto nao existe'}, status=404)
     return JsonResponse({'erro': 'metodo incorreto'},status=405 )
