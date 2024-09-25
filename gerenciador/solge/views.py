@@ -140,7 +140,7 @@ def atualiza_banco_view(request):
         for valores in dados:
             Produto.objects.create(nome = valores['nome'],
                                    preco = valores['preco'],
-                                   codigo = valores['codigo'])
+                                   codigo_de_barras = valores['codigo'])
             
         return render(request,'atualizando_banco.html')
     else:
@@ -160,8 +160,8 @@ def atualiza_banco(arquivo_pdf):
                 if len(tabela_filtrada) <= 3:
                     nome = tabela_filtrada[0][0][5:]
                     codigo =  tabela_filtrada[1][0] # Exemplo de uso
-                    preco = tabela_filtrada[2][0]
-                                    
+                    preco = tabela_filtrada[2][0][3:]
+                    preco = float(preco.replace(',', '.'))
                     item = {
                         "nome": nome,
                         "codigo": codigo,
@@ -171,7 +171,8 @@ def atualiza_banco(arquivo_pdf):
                 elif len(tabela_filtrada) >3:
                     nome = tabela_filtrada[0][0][5:] + tabela_filtrada[1][0]
                     codigo =  tabela_filtrada[2][0] # Exemplo de uso
-                    preco = tabela_filtrada[3][0]
+                    preco = tabela_filtrada[3][0][3:]
+                    preco = float(preco.replace(',', '.'))
                     item = {
                         "nome": nome,
                         "codigo": codigo,
