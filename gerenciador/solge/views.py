@@ -5,6 +5,7 @@ from tkinter import filedialog
 import xml.etree.ElementTree as ET
 import time
 import pyperclip
+import pyautogui
 import json
 from pywinauto import Application
 
@@ -225,6 +226,8 @@ def chama_fun_automacao_impressora(request):
 
         abriu =selecao_tipo_etiqueta(request,1)
         if abriu:
+            if automacao_pyautogui_impressora(request, produtos):
+                pass
             for produto in produtos:
                 print(f'Produto: {produto.nome}, Preço: {produto.preco}, Código: {produto.codigo_de_barras}')
                 #Logica para adicionar a funcao para as coordenadas do bartender.
@@ -240,6 +243,7 @@ def abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw):
         app = Application(backend="uia").start(f'"{caminho_bartender}" "{caminho_arquivo_btw}"')
         time.sleep(20)  # Esperar o BarTender carregar completamente
         print(f"BarTender iniciado com o arquivo {caminho_arquivo_btw}.")
+        #FUNCAO PARA ADICIONAR AQUI ---- MAXIMAR TELA
         return True
     except Exception as e:
         print(f"Erro ao iniciar o BarTender com o arquivo: {e}")
@@ -269,3 +273,38 @@ def selecao_tipo_etiqueta(request,tipo_etiqueta):
         return None
     else:
         return True
+
+def apaga_texto():
+    pyautogui.hotkey('ctrl', 'a')
+    pyautogui.press('backspace')
+
+def enter_text(text):
+    pyperclip.copy(text)
+    time.sleep(1)
+    pyautogui.hotkey('ctrl', 'v')
+    time.sleep(1)
+
+def automacao_pyautogui_impressora(request, produtos):
+    for produto in produtos:
+        print(produto.nome, produto.preco, produto.codigo_de_barras)
+        #etiqueta amarela
+        pyautogui.click(x = 665, y = 294) # posicao do nome
+        apaga_texto()
+        #escreve
+        enter_text(produto.nome)
+        pyautogui.click(x = 642, y = 409)#preço
+        apaga_texto()
+        #escreve
+        enter_text()
+        pyautogui.click(x = 702, y = 554)#codigo de barras
+        pyautogui.click(x = 794, y = 286) # segunda tela do codigo de barras
+        #escreve
+        enter_text(produto.codigo_de_barras)
+        time.sleep(1)
+        pyautogui.click(x = 925, y = 687)#botao fechar da segunda janela do codigo de barras
+        pyautogui.click(x = 1109, y = 226) #espaço fora dos campos texto para ter um press
+        pyautogui.hotkey('ctrl', 'p')
+        #pyautogui.click(x = 681, y = 375) # quantidade
+        #enter_text() #coloca quantidade
+        pyautogui.click(x = 596, y = 583) # botao imprime
+    return True
