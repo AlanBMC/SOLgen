@@ -6,6 +6,8 @@ import xml.etree.ElementTree as ET
 import time
 import pyperclip
 import json
+from pywinauto import Application
+
 from .models import Produto
 from django.http import JsonResponse
 # Create your views here.
@@ -122,8 +124,6 @@ def tratamento_de_quantidade_valor_un(vProd, qCom):
 
     return valor_unitario
 
-
-
 def envia_pro_pyautogui(request):
 
     produtos = request.session.get('produtos', [])
@@ -184,20 +184,88 @@ def atualiza_banco(arquivo_pdf):
 
 
 def impressora(request):
-
-
     return render(request, 'impressora.html')
 
 def adiciona_card(request):
     if request.method == 'POST':
-        body =  json.loads(request.body)
-        print('corpo ',body)
+        body = json.loads(request.body)
         codigo_do_produto = body.get('codigo')
-        print('codigo do produto: ',codigo_do_produto)
+        
         try:
             produto = Produto.objects.get(codigo_de_barras=codigo_do_produto)
-            print(produto.nome, produto.preco)
-            return JsonResponse({'nome': produto.nome, 'preco': produto.preco,'codigo': produto.codigo_de_barras}) 
+            
+            # Obter os produtos armazenados na sessão (apenas códigos de barra)
+            produtos_sessao = request.session.get('cards', [])
+            
+            # Verificar se o produto já está na sessão
+            if codigo_do_produto in produtos_sessao:
+                return JsonResponse({'Status': 'Produto já adicionado'}, status=400)
+            
+            # Adicionar o produto à sessão (somente código de barras)
+            produtos_sessao.append(codigo_do_produto)
+            request.session['cards'] = produtos_sessao  # Salva a sessão
+            
+            # Retorna os dados do produto para o front-end
+            return JsonResponse({'nome': produto.nome, 'preco': produto.preco, 'codigo': produto.codigo_de_barras})
+        
         except Produto.DoesNotExist:
-            return JsonResponse({'Status': 'Produto nao existe'}, status=404)
-    return JsonResponse({'erro': 'metodo incorreto'},status=405 )
+            return JsonResponse({'Status': 'Produto não existe'}, status=404)
+    
+    return JsonResponse({'erro': 'método incorreto'}, status=405)
+
+
+def chama_fun_automacao_impressora(request):
+    if request.method == 'POST':
+        cards_sessao = request.session.get('cards', [])
+        
+        # Recuperar os produtos correspondentes a esses códigos
+        produtos = Produto.objects.filter(codigo_de_barras__in=cards_sessao)
+        
+        # Imprimir ou processar os produtos recuperados
+
+        abriu =selecao_tipo_etiqueta(request,1)
+        if abriu:
+            for produto in produtos:
+                print(f'Produto: {produto.nome}, Preço: {produto.preco}, Código: {produto.codigo_de_barras}')
+                #Logica para adicionar a funcao para as coordenadas do bartender.
+        request.session['cards'] = []
+        return redirect('impressora')
+    else:
+        return redirect('impressora')
+
+def abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw):
+    """Abre o BarTender e carrega diretamente o arquivo .btw."""
+    try:
+        # Inicia o BarTender com o arquivo .btw como argumento
+        app = Application(backend="uia").start(f'"{caminho_bartender}" "{caminho_arquivo_btw}"')
+        time.sleep(20)  # Esperar o BarTender carregar completamente
+        print(f"BarTender iniciado com o arquivo {caminho_arquivo_btw}.")
+        return True
+    except Exception as e:
+        print(f"Erro ao iniciar o BarTender com o arquivo: {e}")
+        return None
+
+def selecao_tipo_etiqueta(request,tipo_etiqueta):
+
+
+    caminho_bartender = r"C:/Program Files/Seagull/BarTender 2022/BarTend.exe"
+    print(tipo_etiqueta, 'etiqueta selecionada em definindo_etiqueta')
+
+    # Definindo o caminho correto baseado no tipo de etiqueta
+    if tipo_etiqueta == 1:
+        caminho_arquivo_btw = fr"C:/Users/alanb/OneDrive/Área de Trabalho/ETIQUETA AMARELA.btw"
+    elif tipo_etiqueta == 2:
+        caminho_arquivo_btw = fr"C:/Users/alanb/OneDrive/Área de Trabalho/etiqueta branca.btw"
+    else:
+        print("Tipo de etiqueta inválido. Selecione 1 ou 2.")
+        return None
+
+    # Abrir o BarTender e carregar o arquivo .btw
+    app = abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw)
+
+    # Verifica se o BarTender foi iniciado corretamente
+    if app is None:
+        print("Falha ao iniciar o BarTender.")
+        return None
+    else:
+        return True

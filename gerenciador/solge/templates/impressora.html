@@ -25,7 +25,7 @@
         <h1>Inserir Código de Produto</h1>
         <input type="text" class="input-bipe" id="productCodeInput" placeholder="Digite o código do produto e pressione Enter">
     </section>
-    <form action="">
+    <form action="{% url 'automacao_impressora' %}" method="POST">{% csrf_token %}
 
             <button class="submit-impressao" >Enviar para impressao</button>
         <section class="cards-container" id="cardsContainer">

@@ -9,5 +9,6 @@ urlpatterns = [
     path('atualiza_banco/', views.atualiza_banco_view, name='atualiza_banco'),
     path('impressora/', views.impressora, name='impressora'),
     path('adicionacard/', views.adiciona_card, name='adicionacard'),
+    path('chama_automatocao_impressora/', views.chama_fun_automacao_impressora, name='automacao_impressora')
     
 ]
