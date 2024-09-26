@@ -242,6 +242,10 @@ def abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw):
         # Inicia o BarTender com o arquivo .btw como argumento
         app = Application(backend="uia").start(f'"{caminho_bartender}" "{caminho_arquivo_btw}"')
         time.sleep(20)  # Esperar o BarTender carregar completamente
+        window = app.top_window()
+
+        # Maximiza a janela
+        window.maximize()
         print(f"BarTender iniciado com o arquivo {caminho_arquivo_btw}.")
         #FUNCAO PARA ADICIONAR AQUI ---- MAXIMAR TELA
         return True
@@ -295,7 +299,7 @@ def automacao_pyautogui_impressora(request, produtos):
         pyautogui.click(x = 642, y = 409)#preço
         apaga_texto()
         #escreve
-        enter_text()
+        enter_text(produto.preco)
         pyautogui.click(x = 702, y = 554)#codigo de barras
         pyautogui.click(x = 794, y = 286) # segunda tela do codigo de barras
         #escreve
