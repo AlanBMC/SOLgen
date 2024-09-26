@@ -149,6 +149,18 @@ a {
     .sidebar.active + .main-content {
         margin-left: 200px;
     }
+    .submit-impressao{
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    left: 10%;
+    z-index: 1000;
+    border-radius: 10px;
+}
+
 }
 
 @media (max-width: 480px) {
@@ -168,21 +180,32 @@ a {
     .navbar {
         font-size: 1.2rem;
     }
+    .submit-impressao{
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        left: 10px;
+        z-index: 1000;
+        border-radius: 10px;
+    }
 }
 /* Estilo para o input */
 input#productCodeInput {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     font-size: 1.2rem;
     margin: 20px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19);
 }
 
 input#productCodeInput:focus {
     outline: none;
-    border-color: #333;
+    border-color: #b7b7b73a;
 }
 
 /* Ajustes para o container de cards */
@@ -191,6 +214,40 @@ input#productCodeInput:focus {
     flex-direction: column; /* Coloca os elementos (h1 e input) em uma coluna */
     justify-content: center; /* Centraliza verticalmente */
     align-items: center; /* Centraliza horizontalmente */
-    height: 100vh; /* Garante que a seção ocupe a altura total da tela */
+    height: 30vh; /* Garante que a seção ocupe a altura total da tela */
     text-align: center; /* Centraliza o texto dentro do h1 */
 }
+.produto-card{
+    background-color: #cfc91962;
+    
+    color: #000000;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.19);
+}
+.alert{
+    background-color: #dc3545;
+    color: #fff;
+    display: flex;
+    text-align: center;
+    justify-content: center; 
+}
+.alert-warning{
+    background-color: #dc3591;
+    color: #fff;
+    display: flex;
+    text-align: center;
+    justify-content: center; 
+}
+.submit-impressao{
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    left: 45%;
+    z-index: 1000;
+    border-radius: 10px;
+}
+

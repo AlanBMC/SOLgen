@@ -197,7 +197,7 @@ def adiciona_card(request):
         try:
             produto = Produto.objects.get(codigo_de_barras=codigo_do_produto)
             print(produto.nome, produto.preco)
-            return JsonResponse({'nome': produto.nome}) 
+            return JsonResponse({'nome': produto.nome, 'preco': produto.preco,'codigo': produto.codigo_de_barras}) 
         except Produto.DoesNotExist:
             return JsonResponse({'Status': 'Produto nao existe'}, status=404)
     return JsonResponse({'erro': 'metodo incorreto'},status=405 )

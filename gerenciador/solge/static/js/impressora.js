@@ -29,12 +29,28 @@ function addcardproduto(codigoproduto) {
     .then(response => response.json())
     .then(data => {
         console.log('Sessão atualizada:', data);
-       
+        
+        if (data.Status && data.Status === 'Produto nao existe') {
+            // Exibir alerta de produto não encontrado
+            const alerta = document.createElement('div');
+            alerta.classList.add('alert', 'alert-warning');
+            alerta.innerHTML = `Produto com o código ${codigoproduto} não foi encontrado.`;
+            document.body.appendChild(alerta); // Adiciona o alerta ao body (ajuste conforme necessário)
+            
+            // Remover o alerta após 2 segundos
+            setTimeout(() => {
+                alerta.remove();
+            }, 4000);
+        } else {
+            // Adicionar o card na página caso o produto tenha sido encontrado
+            addCardToPage(data.nome, data.preco, data.codigo);
+        }
     })
     .catch(error => {
         console.error('Erro ao atualizar:', error);
     });
 }
+
 
 function getCookie(name) {
     let cookieValue = null;
@@ -54,9 +70,20 @@ function getCookie(name) {
 
 function addCardToPage(nome, preco, codigo) {
     // Cria o elemento do card
+    if (document.getElementById(`card-${codigo}`)) {
+        const alerta = document.createElement('div');
+        alerta.classList.add('alert', 'alert-danger');
+        alerta.innerHTML = `Card para o produto com código ${codigo} já existe.`
+        document.body.appendChild(alerta);
+        setTimeout(()=>{
+            alerta.remove();
+
+        }, 2000);
+        return; // Se o card já existe, não cria outro
+    }
     const card = document.createElement('div');
     card.classList.add('produto-card');
-
+    card.id = `card-${codigo}`;
     // Adiciona o conteúdo do card
     card.innerHTML = `
         <h3>${nome}</h3>
@@ -65,5 +92,5 @@ function addCardToPage(nome, preco, codigo) {
     `;
 
     // Adiciona o card à página (supondo que exista uma div com id "cards-container")
-    document.getElementById('cards-container').appendChild(card);
+    document.getElementById('cardsContainer').appendChild(card);
 }
