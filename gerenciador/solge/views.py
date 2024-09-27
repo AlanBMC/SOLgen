@@ -242,30 +242,35 @@ def abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw):
         # Tenta conectar-se ao BarTender já aberto
         app = None
         try:
+            # Tenta conectar-se ao BarTender em execução
             app = Application(backend="uia").connect(path=caminho_bartender)
-            print("BarTender já está em execução.")
+            window = app.top_window()
+            # Traz a janela para o foco e maximiza
+            window.set_focus()
+            window.maximize()
+            print("BarTender já estava em execução e foi trazido para o foco.")
+            return True
         except Exception as e:
             print("BarTender não estava em execução, iniciando...")
-        
+
         # Se não conseguir conectar, inicia o BarTender
         if app is None:
             app = Application(backend="uia").start(f'"{caminho_bartender}" "{caminho_arquivo_btw}"')
-            time.sleep(20)  # Esperar o BarTender carregar completamente
+            time.sleep(15)  # Esperar o BarTender carregar completamente
 
         # Obter a janela principal do BarTender
         window = app.top_window()
 
-        # Maximiza a janela
+        # Traz a janela para o foco e maximiza (caso ainda não tenha sido feita)
+        window.set_focus()
         window.maximize()
         print(f"BarTender iniciado com o arquivo {caminho_arquivo_btw}.")
-
+        
         return True
     except Exception as e:
         print(f"Erro ao iniciar ou conectar ao BarTender com o arquivo: {e}")
         return None
 def selecao_tipo_etiqueta(request,tipo_etiqueta):
-
-
     caminho_bartender = r"C:/Program Files/Seagull/BarTender 2022/BarTend.exe"
     print(tipo_etiqueta, 'etiqueta selecionada em definindo_etiqueta')
 
@@ -311,7 +316,7 @@ def automacao_pyautogui_impressora(request, produtos):
         pyautogui.click(x = 642, y = 409)#preço
         apaga_texto()
         #escreve
-        enter_text(produto.preco)
+        enter_text(f'R$ - {produto.preco:.2f}')
         pyautogui.doubleClick(x = 702, y = 554)#codigo de barras
         time.sleep(2)
         pyautogui.click(x = 794, y = 286) # segunda tela do codigo de barras
@@ -323,8 +328,11 @@ def automacao_pyautogui_impressora(request, produtos):
         time.sleep(2)
         pyautogui.click(x = 1109, y = 226) #espaço fora dos campos texto para ter um press
         pyautogui.hotkey('ctrl', 'p')
-        #pyautogui.click(x = 681, y = 375) # quantidade
-        #enter_text() #coloca quantidade
-        time.sleep(3)
+        time.sleep(4)
+        pyautogui.click(x = 681, y = 375) # quantidade
+        apaga_texto()
+        enter_text('1') #coloca quantidade
+        
         pyautogui.click(x = 596, y = 583) # botao imprime
+    request.session['cards'] = []
     return True
