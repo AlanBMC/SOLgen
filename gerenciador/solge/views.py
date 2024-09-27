@@ -191,7 +191,8 @@ def impressora(request):
         produtos = Produto.objects.filter(codigo_de_barras__in=cards_sessao)
         print(produtos)
         return render(request, 'impressora.html', {'produtos': produtos})
-
+    else:
+        return render(request, 'impressora.html')
 def adiciona_card(request):
     if request.method == 'POST':
         body = json.loads(request.body)
@@ -219,7 +220,21 @@ def adiciona_card(request):
     
     return JsonResponse({'erro': 'método incorreto'}, status=405)
 
-
+def delete_card_impressora(request):
+    if request.method == 'POST':
+        codigo = request.POST.get('codigo')
+        produtos_sessao = request.session.get('cards', [])
+        if codigo in produtos_sessao:
+            produtos_sessao.remove(codigo)
+            request.session['cards'] = produtos_sessao
+        return redirect('impressora')
+def limpa_impressora(request):
+    """
+    funcao para tirar os cards da sessao
+    """
+    request.session['cards'] = []
+    return redirect('impressora')
+    
 def chama_fun_automacao_impressora(request):
     if request.method == 'POST':
         cards_sessao = request.session.get('cards', [])

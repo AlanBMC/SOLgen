@@ -11,7 +11,6 @@
 
 <body>
     <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
-   
     <!-- Menu Lateral -->
     <nav class="sidebar" id="sidebar">
         <ul class="nav-links">
@@ -28,6 +27,7 @@
     <form action="{% url 'automacao_impressora' %}" method="POST">{% csrf_token %}
 
             <button class="submit-impressao" >Enviar para impressao</button>
+    </form>
         <section class="cards-container" id="cardsContainer">
             {% if produtos%}
             {%for produto in produtos%}
@@ -36,11 +36,14 @@
                 <h3>{{produto.nome}}</h3>
                 <p>Preço: R$ {{produto.preco}}</p>
                 <p>Código: {{produto.codigo_de_barras}}</p>
+                <form action="{% url 'delete_card_impressora' %}" method="POST"> {% csrf_token %}
+                    <input type="hidden" name="codigo" value="{{produto.codigo_de_barras}}">
+                    <button type="submit">Delete</button>
+                </form>
             </div>
             {%endfor%}
             {%endif%}
         </section>
-    </form>
 </body>
 <script src="{%static 'js/impressora.js' %}"></script>
 

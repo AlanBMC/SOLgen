@@ -86,10 +86,11 @@ function addCardToPage(nome, preco, codigo) {
     card.id = `card-${codigo}`;
     // Adiciona o conteúdo do card
     card.innerHTML = `
-        <h3>${nome}</h3>
-        <p>Preço: R$ ${preco.toFixed(2)}</p>
-        <p>Código: ${codigo}</p>
-    `;
+    <h3>${nome}</h3>
+    <p>Preço: R$ ${preco.toFixed(2)}</p>
+    <p>Código: ${codigo}</p>
+
+`;
 
     // Adiciona o card à página (supondo que exista uma div com id "cards-container")
     document.getElementById('cardsContainer').appendChild(card);
