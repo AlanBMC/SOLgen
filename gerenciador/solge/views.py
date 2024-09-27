@@ -224,35 +224,45 @@ def chama_fun_automacao_impressora(request):
         
         # Imprimir ou processar os produtos recuperados
 
-        abriu =selecao_tipo_etiqueta(request,1)
+        abriu = selecao_tipo_etiqueta(request,1)
         if abriu:
-            if automacao_pyautogui_impressora(request, produtos):
-                pass
-            for produto in produtos:
-                print(f'Produto: {produto.nome}, Preço: {produto.preco}, Código: {produto.codigo_de_barras}')
-                #Logica para adicionar a funcao para as coordenadas do bartender.
+           if  automacao_pyautogui_impressora(request, produtos):
+               
+               pass
+
         request.session['cards'] = []
         return redirect('impressora')
     else:
         return redirect('impressora')
 
+
 def abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw):
-    """Abre o BarTender e carrega diretamente o arquivo .btw."""
+    """Verifica se o BarTender já está aberto, caso contrário, abre e carrega diretamente o arquivo .btw."""
     try:
-        # Inicia o BarTender com o arquivo .btw como argumento
-        app = Application(backend="uia").start(f'"{caminho_bartender}" "{caminho_arquivo_btw}"')
-        time.sleep(20)  # Esperar o BarTender carregar completamente
+        # Tenta conectar-se ao BarTender já aberto
+        app = None
+        try:
+            app = Application(backend="uia").connect(path=caminho_bartender)
+            print("BarTender já está em execução.")
+        except Exception as e:
+            print("BarTender não estava em execução, iniciando...")
+        
+        # Se não conseguir conectar, inicia o BarTender
+        if app is None:
+            app = Application(backend="uia").start(f'"{caminho_bartender}" "{caminho_arquivo_btw}"')
+            time.sleep(20)  # Esperar o BarTender carregar completamente
+
+        # Obter a janela principal do BarTender
         window = app.top_window()
 
         # Maximiza a janela
         window.maximize()
         print(f"BarTender iniciado com o arquivo {caminho_arquivo_btw}.")
-        #FUNCAO PARA ADICIONAR AQUI ---- MAXIMAR TELA
+
         return True
     except Exception as e:
-        print(f"Erro ao iniciar o BarTender com o arquivo: {e}")
+        print(f"Erro ao iniciar ou conectar ao BarTender com o arquivo: {e}")
         return None
-
 def selecao_tipo_etiqueta(request,tipo_etiqueta):
 
 
@@ -269,10 +279,10 @@ def selecao_tipo_etiqueta(request,tipo_etiqueta):
         return None
 
     # Abrir o BarTender e carregar o arquivo .btw
-    app = abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw)
+    window = abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw)
 
     # Verifica se o BarTender foi iniciado corretamente
-    if app is None:
+    if window is None:
         print("Falha ao iniciar o BarTender.")
         return None
     else:
@@ -292,23 +302,29 @@ def automacao_pyautogui_impressora(request, produtos):
     for produto in produtos:
         print(produto.nome, produto.preco, produto.codigo_de_barras)
         #etiqueta amarela
+        time.sleep(2)
         pyautogui.click(x = 665, y = 294) # posicao do nome
         apaga_texto()
         #escreve
         enter_text(produto.nome)
+        time.sleep(1)
         pyautogui.click(x = 642, y = 409)#preço
         apaga_texto()
         #escreve
         enter_text(produto.preco)
-        pyautogui.click(x = 702, y = 554)#codigo de barras
+        pyautogui.doubleClick(x = 702, y = 554)#codigo de barras
+        time.sleep(2)
         pyautogui.click(x = 794, y = 286) # segunda tela do codigo de barras
+        apaga_texto()
         #escreve
         enter_text(produto.codigo_de_barras)
         time.sleep(1)
         pyautogui.click(x = 925, y = 687)#botao fechar da segunda janela do codigo de barras
+        time.sleep(2)
         pyautogui.click(x = 1109, y = 226) #espaço fora dos campos texto para ter um press
         pyautogui.hotkey('ctrl', 'p')
         #pyautogui.click(x = 681, y = 375) # quantidade
         #enter_text() #coloca quantidade
+        time.sleep(3)
         pyautogui.click(x = 596, y = 583) # botao imprime
     return True
