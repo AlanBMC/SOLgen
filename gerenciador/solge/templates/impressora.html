@@ -29,7 +29,16 @@
 
             <button class="submit-impressao" >Enviar para impressao</button>
         <section class="cards-container" id="cardsContainer">
-            
+            {% if produtos%}
+            {%for produto in produtos%}
+            <div class="produto-card" id="id-{{produto.codigo_de_barras}}">
+
+                <h3>{{produto.nome}}</h3>
+                <p>Preço: R$ {{produto.preco}}</p>
+                <p>Código: {{produto.codigo_de_barras}}</p>
+            </div>
+            {%endfor%}
+            {%endif%}
         </section>
     </form>
 </body>

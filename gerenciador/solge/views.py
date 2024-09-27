@@ -8,9 +8,9 @@ import pyperclip
 import pyautogui
 import json
 from pywinauto import Application
-
 from .models import Produto
 from django.http import JsonResponse
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -185,7 +185,12 @@ def atualiza_banco(arquivo_pdf):
 
 
 def impressora(request):
-    return render(request, 'impressora.html')
+    cards_sessao = request.session.get('cards', [])
+    if cards_sessao:
+    # Recuperar os produtos correspondentes a esses códigos
+        produtos = Produto.objects.filter(codigo_de_barras__in=cards_sessao)
+        print(produtos)
+        return render(request, 'impressora.html', {'produtos': produtos})
 
 def adiciona_card(request):
     if request.method == 'POST':
