@@ -100,3 +100,21 @@ function clicando(){
         document.getElementById('arquivo').click();
     }, 1000);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Mostra o loader quando o formulário for submetido
+    const form = document.querySelector('form');
+    const loader = document.getElementById('loader');
+
+    if (form) {
+        form.addEventListener('submit', function () {
+            // Mostra o loader
+            loader.style.display = 'block';
+        });
+    }
+
+    // Você pode opcionalmente usar window.onload para esconder o loader após a página recarregar.
+    window.onload = function() {
+        loader.style.display = 'none';
+    };
+});

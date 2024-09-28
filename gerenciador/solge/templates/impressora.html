@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="{% static 'css/impressora.css'%}">
 
 </head>
-
+<style>
+    .checksbox{
+        margin-left:45%;
+    }
+</style>
 <body>
     <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
     <!-- Menu Lateral -->
@@ -27,6 +31,14 @@
     <form action="{% url 'automacao_impressora' %}" method="POST">{% csrf_token %}
 
             <button class="submit-impressao" >Enviar para impressao</button>
+           <div class="checksbox">
+            <input type="checkbox" value="1" name="tipo1">
+            <label for="">Etiqueta amarela</label><br>
+            <input type="checkbox" value="2" name="tipo2">
+            <label for="">Etiqueta branca</label>
+           </div>
+              
+              
     </form>
         <section class="cards-container" id="cardsContainer">
             {% if produtos%}

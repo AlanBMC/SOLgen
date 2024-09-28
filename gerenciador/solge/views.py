@@ -236,15 +236,22 @@ def limpa_impressora(request):
     return redirect('impressora')
     
 def chama_fun_automacao_impressora(request):
+    etiqueta = 0
     if request.method == 'POST':
+        etiqueta_amarela =  request.POST.get('tipo1')
+        etiqueta_branca = request.POST.get('tipo2')
+        if etiqueta_amarela:
+            etiqueta = 1
+        elif etiqueta_branca:
+            etiqueta = 2
         cards_sessao = request.session.get('cards', [])
         
         # Recuperar os produtos correspondentes a esses códigos
         produtos = Produto.objects.filter(codigo_de_barras__in=cards_sessao)
         
         # Imprimir ou processar os produtos recuperados
-
-        abriu = selecao_tipo_etiqueta(request,1)
+        print('etiqueta : ',etiqueta)
+        abriu = selecao_tipo_etiqueta(request,etiqueta)
         if abriu:
            if  automacao_pyautogui_impressora(request, produtos):
                
@@ -327,6 +334,8 @@ def automacao_pyautogui_impressora(request, produtos):
     for produto in produtos:
         print(produto.nome, produto.preco, produto.codigo_de_barras)
         #etiqueta amarela
+        time.sleep(1)
+        pyautogui.click(x = 665, y = 294)
         time.sleep(2)
         pyautogui.click(x = 665, y = 294) # posicao do nome
         apaga_texto()
