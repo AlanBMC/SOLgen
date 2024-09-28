@@ -19,7 +19,7 @@
             <li><a href="{%url 'atualiza_banco' %}" >Atualizar banco</a></li>
             <li><a href="{%url 'impressora' %}" >Impressora</a></li>
 
-            <li><a href="#">Sobre</a></li>
+            <li><a href="{% url 'criasessao' %}">Cadastro</a></li>
         </ul>
     </nav>
 
@@ -29,12 +29,7 @@
 
         <!-- Container dos Cards -->
         <section class="cards-container">
-            <a href="#" class="card">
-                <div class="card-content">
-                    <h3>Card 1</h3>
-                    <p>Descrição do Card 1.</p>
-                </div>
-            </a>
+            
             <a href="{%url 'atualiza_banco' %}" class="card">
                 <div class="card-content">
                     <h3>Atualiza pdf</h3>
