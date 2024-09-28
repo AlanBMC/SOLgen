@@ -7,9 +7,10 @@ import time
 import pyperclip
 import pyautogui
 import json
+import math
 from pywinauto import Application
 from .models import Produto
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 
 # Create your views here.
 def home(request):
@@ -128,7 +129,7 @@ def tratamento_de_quantidade_valor_un(vProd, qCom):
 def envia_pro_pyautogui(request):
 
     produtos = request.session.get('produtos', [])
-    print(produtos)
+    request.session['produtos'] = []
     return redirect('criasessao')
 
 def atualiza_banco_view(request):
@@ -261,6 +262,34 @@ def chama_fun_automacao_impressora(request):
         return redirect('impressora')
     else:
         return redirect('impressora')
+
+def ajusta_valores_produtos(request):
+    if request.method == 'POST':
+        porcentagem = float(request.POST.get('porcentagem', 1))  # Padrão para 1, se não fornecido
+        
+        # Verifica se 'valor-adicional' está vazio e define como 0 se necessário
+        valor_adicional_str = request.POST.get('valor-adicional', '')
+        adicional = float(valor_adicional_str) if valor_adicional_str else 0  # Usa 0 se o campo estiver vazio
+
+        meia_nota = request.POST.get('meia-nota')  # Aqui você pode usar para outras lógicas, se necessário
+        produtos_sessao_cadastro = request.session.get('produtos', [])
+            
+        for produto in produtos_sessao_cadastro:
+            try:
+                if meia_nota:
+                # Converte 'valor_revenda' para float antes de realizar o cálculo
+                    valor_revenda = float(produto['valor_revenda']) * 2
+                else:
+                    valor_revenda = float(produto['valor_revenda'])
+                # Calcula o novo valor revenda
+                novo_valor = (valor_revenda * porcentagem) + adicional
+                produto['valor_revenda'] = math.ceil(novo_valor)  # Atualiza o valor revenda
+            except ValueError:
+                # Se não puder converter, pode adicionar lógica para tratar o erro
+                return HttpResponse('Erro: Valor revenda inválido')
+
+        request.session['produtos'] = produtos_sessao_cadastro
+        return HttpResponse('Produtos Atualizados')
 
 
 def abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw):

@@ -11,5 +11,6 @@ urlpatterns = [
     path('adicionacard/', views.adiciona_card, name='adicionacard'),
     path('chama_automatocao_impressora/', views.chama_fun_automacao_impressora, name='automacao_impressora'),
     path('delete_card_impressora/', views.delete_card_impressora, name='delete_card_impressora'),
+    path('ajusta_valores/', views.ajusta_valores_produtos, name='ajusta_valor'),
     
 ]
