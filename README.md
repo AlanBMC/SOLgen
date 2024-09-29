@@ -1,4 +1,4 @@
-# Gerenciador para Sistemas PDV's Legados - SOLgen (Versão 2.0.0)
+# Gerenciador para Sistemas PDV's Legados - SOLgen (Versão 3.0.0)
 
 Este projeto é um **Gerenciador para Sistemas PDV's Legados**, focado na automação de processos de cadastro de produtos, extração de dados de arquivos XML e PDF, e geração de etiquetas utilizando automação e integração com leitores de código de barras. O sistema é voltado para simplificar o processo de gestão em PDV's legados e tornar o fluxo de trabalho mais ágil e automatizado.
 
