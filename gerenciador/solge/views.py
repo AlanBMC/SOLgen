@@ -11,7 +11,7 @@ import math
 from pywinauto import Application
 from .models import Produto
 from django.http import JsonResponse,HttpResponse, HttpResponseRedirect
-
+from .logic_gui import cadastraprod, enter_text, apaga_texto, selecao_tipo_etiqueta, automacao_pyautogui_impressora
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -158,8 +158,8 @@ def tratamento_de_quantidade_valor_un(vProd, qCom):
 def envia_pro_pyautogui(request):
 
     produtos = request.session.get('produtos', [])
-    print(produtos)
     request.session['produtos'] = []
+    cadastraprod(produtos)
     return redirect('criasessao')
 
 def atualiza_banco_view(request):
@@ -285,8 +285,8 @@ def chama_fun_automacao_impressora(request):
         abriu = selecao_tipo_etiqueta(request,etiqueta)
         if abriu:
            if  automacao_pyautogui_impressora(request, produtos):
+               request.session['cards'] = []
                
-               pass
 
         request.session['cards'] = []
         return redirect('impressora')
@@ -295,72 +295,10 @@ def chama_fun_automacao_impressora(request):
 
 
 
-def abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw):
-    """Verifica se o BarTender já está aberto, caso contrário, abre e carrega diretamente o arquivo .btw."""
-    try:
-        # Tenta conectar-se ao BarTender já aberto
-        app = None
-        try:
-            # Tenta conectar-se ao BarTender em execução
-            app = Application(backend="uia").connect(path=caminho_bartender)
-            window = app.top_window()
-            # Traz a janela para o foco e maximiza
-            window.set_focus()
-            window.maximize()
-            print("BarTender já estava em execução e foi trazido para o foco.")
-            return True
-        except Exception as e:
-            print("BarTender não estava em execução, iniciando...")
 
-        # Se não conseguir conectar, inicia o BarTender
-        if app is None:
-            app = Application(backend="uia").start(f'"{caminho_bartender}" "{caminho_arquivo_btw}"')
-            time.sleep(15)  # Esperar o BarTender carregar completamente
 
-        # Obter a janela principal do BarTender
-        window = app.top_window()
 
-        # Traz a janela para o foco e maximiza (caso ainda não tenha sido feita)
-        window.set_focus()
-        window.maximize()
-        print(f"BarTender iniciado com o arquivo {caminho_arquivo_btw}.")
-        
-        return True
-    except Exception as e:
-        print(f"Erro ao iniciar ou conectar ao BarTender com o arquivo: {e}")
-        return None
-def selecao_tipo_etiqueta(request,tipo_etiqueta):
-    caminho_bartender = r"C:/Program Files/Seagull/BarTender 2022/BarTend.exe"
-    print(tipo_etiqueta, 'etiqueta selecionada em definindo_etiqueta')
 
-    # Definindo o caminho correto baseado no tipo de etiqueta
-    if tipo_etiqueta == 1:
-        caminho_arquivo_btw = fr"C:/Users/alanb/OneDrive/Área de Trabalho/ETIQUETA AMARELA.btw"
-    elif tipo_etiqueta == 2:
-        caminho_arquivo_btw = fr"C:/Users/alanb/OneDrive/Área de Trabalho/etiqueta branca.btw"
-    else:
-        print("Tipo de etiqueta inválido. Selecione 1 ou 2.")
-        return None
-
-    # Abrir o BarTender e carregar o arquivo .btw
-    window = abrir_bartender_com_arquivo(caminho_bartender, caminho_arquivo_btw)
-
-    # Verifica se o BarTender foi iniciado corretamente
-    if window is None:
-        print("Falha ao iniciar o BarTender.")
-        return None
-    else:
-        return True
-
-def apaga_texto():
-    pyautogui.hotkey('ctrl', 'a')
-    pyautogui.press('backspace')
-
-def enter_text(text):
-    pyperclip.copy(text)
-    time.sleep(1)
-    pyautogui.hotkey('ctrl', 'v')
-    time.sleep(1)
 
 def automacao_pyautogui_impressora(request, produtos):
     for produto in produtos:
@@ -395,5 +333,5 @@ def automacao_pyautogui_impressora(request, produtos):
         enter_text('1') #coloca quantidade
         
         pyautogui.click(x = 596, y = 583) # botao imprime
-    request.session['cards'] = []
+    
     return True

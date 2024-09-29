@@ -28,7 +28,7 @@
             <h2>Extrair dados do xml</h2>
 
             <!-- Formulário no Modal -->
-            <form action="{% url 'criasessao' %}" method="POST" enctype="multipart/form-data" target="resultado">
+            <form action="{% url 'criasessao' %}" method="POST" enctype="multipart/form-data" >
                 {% csrf_token %}
                 <label for="arquivo">Arquivo XML:</label>
                 <input type="file" name="arquivo" id="arquivo" accept=".xml" required>
