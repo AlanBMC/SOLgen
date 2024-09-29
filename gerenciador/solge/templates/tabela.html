@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="{% static 'css/tabela.css'%}">
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+   
+    <!-- Menu Lateral -->
+    <nav class="sidebar" id="sidebar">
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{%url 'atualiza_banco' %}" >Atualizar banco</a></li>
+            <li><a href="{%url 'impressora' %}" >Impressora</a></li>
+
+                
+        </ul>
+    </nav>
+    
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Extrair dados do xml</h2>
+
+            <!-- Formulário no Modal -->
+            <form action="{% url 'criasessao' %}" method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <label for="arquivo">Arquivo XML:</label>
+                <input type="file" name="arquivo" id="arquivo" accept=".xml" required>
+                
+                <button type="submit">Visualizar produtos</button>
+            </form>
+        </div>
+        <div class="ajusta-valores">
+            <form action="{% url 'ajusta_valor' %}" method="POST" hx-post="{% url 'ajusta_valor' %}" hx-target="#validador" hx-swap="innerHTML"> {% csrf_token %}
+
+                <h2>Ajustar valores</h2>
+                
+                <!-- Campo de porcentagem -->
+                <label for="porcentagem">Porcentagem</label>
+                <input type="number" id="porcentagem" name="porcentagem" value="1.7" step="0.01" required><br>
+                
+                <!-- Checkbox para meia nota -->
+                <label for="meia-nota">Meia nota</label>
+                <input type="checkbox" id="meia-nota" value="True" name="meia-nota">
+                
+                <!-- Campo de valor adicional -->
+                <label for="valor-adicional">Valor adicional</label>
+                <input type="text" id="valor-adicional" name="valor-adicional" placeholder="Digite o valor adicional"><br>
+            <p>Os valores sao arredondados para cima automaticamente</p>
+                <!-- Botão de enviar -->
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+        <div id="validador" class="validador"> </div>
+    <div class="container" id="resultado">
+        <h2>Produtos</h2>
+
+        <!-- Tabela Editável -->
+        <table id="editableTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Codigo de barras</th>
+                    <th>Preço</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                    {%for produto in produtos %}
+                    <tr data-id="{{ produto.codigo_de_barras }}">
+                        <td contenteditable="true" class="editable nome">{{ produto.nome }}</td>
+                        <td contenteditable="true" class="editable codigo">{{ produto.codigo_de_barras }}</td>
+                        <td contenteditable="true" class="editable preco">{{ produto.valor_revenda }}</td>
+                        
+             
+                        <td><button type="button" class="delete-btn" onclick="deleteRow(this)">Excluir</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <!-- Botão de Adicionar Linha -->
+            <form  action="{% url 'automacao_de_cadastro' %}" method="POST"> {% csrf_token %}
+                <button class="add-btn" type="submit">Automação cadastramento</button>
+            </div>
+        </form>
+
+    <!-- Script para adicionar e remover linhas -->
+   
+</body>
+<script src="{%static 'js/tabela.js' %}"></script>
+</html>

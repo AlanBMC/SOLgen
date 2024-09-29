@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressora</title>
+    <link rel="stylesheet" href="{% static 'css/impressora.css'%}">
+
+</head>
+<style>
+    .checksbox{
+        margin-left:45%;
+    }
+</style>
+<body>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+    <!-- Menu Lateral -->
+    <nav class="sidebar" id="sidebar">
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{%url 'atualiza_banco' %}" >Atualizar banco</a></li>
+            <li><a href="{%url 'impressora' %}" >Impressora</a></li>
+            <li><a href="{% url 'criasessao' %}">Cadastro</a></li>
+        </ul>
+    </nav>
+    <section class="main">
+        <h1>Inserir Código de Produto</h1>
+        <input type="text" class="input-bipe" id="productCodeInput" placeholder="Digite o código do produto e pressione Enter">
+    </section>
+    <form action="{% url 'automacao_impressora' %}" method="POST">{% csrf_token %}
+
+            <button class="submit-impressao" >Enviar para impressao</button>
+           <div class="checksbox">
+            <input type="checkbox" value="1" name="tipo1">
+            <label for="">Etiqueta amarela</label><br>
+            <input type="checkbox" value="2" name="tipo2">
+            <label for="">Etiqueta branca</label>
+           </div>
+              
+              
+    </form>
+        <section class="cards-container" id="cardsContainer">
+            {% if produtos%}
+            {%for produto in produtos%}
+            <div class="produto-card" id="id-{{produto.codigo_de_barras}}">
+
+                <h3>{{produto.nome}}</h3>
+                <p>Preço: R$ {{produto.preco}}</p>
+                <p>Código: {{produto.codigo_de_barras}}</p>
+                <form action="{% url 'delete_card_impressora' %}" method="POST"> {% csrf_token %}
+                    <input type="hidden" name="codigo" value="{{produto.codigo_de_barras}}">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+            {%endfor%}
+            {%endif%}
+        </section>
+</body>
+<script src="{%static 'js/impressora.js' %}"></script>
+
+</html>
