@@ -3,15 +3,64 @@ import pyautogui
 from pywinauto import Application
 from time import sleep
 def cadastraprod(produtos):
-    print(produtos)
-    #logica para abrir o pdv
-    sleep(1)
-    pyautogui.click()
-    pyautogui.click()
-    pyautogui.click()
-    pyautogui.click()
-    pyautogui.click()
-    pyautogui.click()
+    #abre
+    #entra no cadastro
+    #sleep(2)
+    #pyautogui.click(x = 256, y = 606) #clica proprietário
+    #sleep(2)
+    #pyautogui.click(x = 79, y = 584)  #clica em cadastro
+    #sleep(2)
+    #pyautogui.click(x = 662, y = 218) #clica no segundo botão o cadastro
+    #sleep(2)
+    for produto in produtos:
+        # Novo item
+        sleep(2)
+        pyautogui.click(x=1239, y=185)
+        sleep(1)
+        # Clica em OK
+        click_ok()
+
+        # Nome do item
+        pyautogui.click(x=715, y=280)
+        enter_text(produto['nome'])
+        sleep(0.5)
+
+        # Clica na janela de fiscal
+        pyautogui.click(x=612, y=307)
+        sleep(1)
+
+        # Clica no input de NCM
+        pyautogui.click(x=729, y=353)
+        digita_texto(produto['ncm'])
+        sleep(1)
+        
+
+        
+        # Volta para geral
+        pyautogui.click(x=416, y=306)
+        sleep(1)
+
+        # Coloca o código
+        pyautogui.click(x=590, y=334)
+        pyautogui.hotkey('ctrl', 'a')
+        pyautogui.press('backspace')
+        enter_text(produto['codigo_de_barras'])
+        sleep(1)
+
+        # Coloca preço de revenda
+        pyautogui.click(x=577, y=592)
+        enter_text(produto['valor_revenda'])
+        sleep(1)
+
+        # Salva item
+        pyautogui.click(x=1460, y=187)
+        sleep(1)
+
+        # Aperta ok após salvar
+        click_ok()
+        sleep(2)  # Esperar o item ser salvo
+
+
 
 
 def apaga_texto():
@@ -23,6 +72,13 @@ def enter_text(text):
     sleep(1)
     pyautogui.hotkey('ctrl', 'v')
     sleep(1)
+
+def click_ok():
+    sleep(1)
+    pyautogui.click(x=1154, y=562)
+
+def digita_texto(texto):
+    pyautogui.write(texto, interval=0.1)
 
 def abrepdv():
     try:
