@@ -1,0 +1,21 @@
+{
+    "short_name": "ETIQUETA",
+    "name": "Gen",
+    "icons": [
+      {
+        "src": "/static/icons/maskable_icon_x192 (4).png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/static/icons/maskable_icon_x512 (5).png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#000000"
+  }
