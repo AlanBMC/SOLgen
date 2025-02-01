@@ -23,61 +23,14 @@ Este projeto é um **Gerenciador para Sistemas PDV's Legados**, focado na automa
 
 ### Frameworks e Ferramentas
 
-![Flet](https://img.shields.io/badge/Flet-cd2152?style=plastic&logo=flutter&logoColor=white)
+![Django](https://img.shields.io/badge/Django-1cb42f?style=plastic&logo=Django&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-D7CB25?style=plastic&logo=python&logoColor=blue)
 
-## Requisitos
+### Motivo da Descontinuação
 
-- **Bartend**: Necessário para gerar e imprimir etiquetas.
-- **Python 3.x**: Certifique-se de que o Python está instalado.
-- **Dependências do Projeto**: Todas as bibliotecas listadas nas dependências.
+Durante o desenvolvimento, identificamos vários desafios estruturais que comprometeram a viabilidade do projeto a longo prazo. Para garantir um sistema mais robusto e escalável, optamos por iniciar um novo repositório, com uma abordagem melhor planejada.
 
-## Instalação
-
-1. Clone este repositório:
-
-    ```bash
-    git clone https://github.com/usuario/repositorio.git
-    cd repositorio
-    ```
-
-2. Instale as dependências do projeto:
-
-    ```bash
-    pip install pyautogui pdfplumber pywin32 pywinauto ctypes flet pygame gTTS
-    ```
-
-3. Certifique-se de que o **Bartend** está instalado corretamente no sistema. Você também deve ajustar o caminho para o Bartend e o modelo de etiquetas no código.
-
-## Como Usar
-
-1. Inicie o sistema com o seguinte comando:
-
-    ```bash
-    python main.py
-    ```
-
-2. A interface gráfica permite realizar as seguintes tarefas:
-   - **Cadastro Automático de Produtos**: Cadastrar produtos em sistemas legados usando automação.
-   - **Extração de Dados**: Extrair dados relevantes de arquivos XML e PDF.
-   - **Bipagem e Impressão de Etiquetas**: Ler códigos de barras e gerar etiquetas para impressão no Bartend.
-
-## Planejamento da Versão 3.0.0
-
-Na versão 3.0.0, o projeto trará diversas melhorias e novas funcionalidades, como:
-- **Otimização da Automação**: Melhorias no fluxo de automação para reduzir tempo e erros em sistemas PDV's.
-- **API RESTful**: Implementação de uma API para permitir integração remota de sistemas externos com o SOLgen.
-- **Interface Mais Amigável**: Melhorias na interface gráfica usando o framework Flet.
-- **Suporte para Novos Formatos de Arquivos**: Expansão do suporte para outros formatos de arquivos, além de XML e PDF.
-
-## Contribuição
-
-Contribuições são sempre bem-vindas! Se você quiser contribuir com o projeto, sinta-se à vontade para abrir issues e pull requests.
-
----
-
-**Adendo para a Versão 3.0.0**: 
-Estamos planejando uma atualização significativa com novas funcionalidades e melhorias na usabilidade, na eficiência da automação e integração de APIs. Fique atento para as novidades!
+O aprendizado obtido com o SOLgen foi valioso e será utilizado na concepção do novo sistema, que contará com melhorias significativas em arquitetura, usabilidade e performance.
 
 ## Sobre o autor
 
