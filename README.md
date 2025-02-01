@@ -28,9 +28,9 @@ Este projeto é um **Gerenciador para Sistemas PDV's Legados**, focado na automa
 
 ### Motivo da Descontinuação
 
-Durante o desenvolvimento, identificamos vários desafios estruturais que comprometeram a viabilidade do projeto a longo prazo. Para garantir um sistema mais robusto e escalável, optamos por iniciar um novo repositório, com uma abordagem melhor planejada.
+Durante o desenvolvimento, foi identificado vários desafios estruturais que comprometeram a viabilidade do projeto a longo prazo. Para garantir um sistema mais robusto e escalável, optei por iniciar um novo repositório, com uma abordagem melhor planejada.
 
-O aprendizado obtido com o SOLgen foi valioso e será utilizado na concepção do novo sistema, que contará com melhorias significativas em arquitetura, usabilidade e performance.
+O aprendizado obtido com o SOLgen, o prototipo, foi fundamental para guiar, esclarecer sobre o caminho que irei tomar daqui pra frente em relação ao projeto.
 
 ## Sobre o autor
 
